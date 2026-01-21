@@ -23,7 +23,7 @@ echo "WITH unique_bids AS (
   bucket_max AS (
       SELECT
           block_number,
-          floor(ms_from_slot_start / 200) * 200 AS ms_bucket,
+          floor(ms_from_slot_start / 50) * 50 AS ms_bucket,
           max(value) / 1e18 AS max_bid_eth
       FROM unique_bids
       GROUP BY block_number, ms_bucket

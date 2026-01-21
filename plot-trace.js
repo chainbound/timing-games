@@ -23,6 +23,13 @@ const data = d3.csvParse(csvData, d3.autoType);
 
 const maxBlocks = d3.max(data, (d) => d.num_blocks);
 
+// Auto-detect bucket size from the data
+const bucketSize = data.length > 1 ? data[1].ms_bucket - data[0].ms_bucket : 200;
+
+// Calculate dynamic width based on number of data points
+// Give each bar ~80px width for proper label spacing
+const plotWidth = Math.max(1400, data.length * 60);
+
 // Define metrics with their colors
 const metrics = [
   { name: "mean", field: "mean_increase_eth", color: "#4e79a7" },
@@ -42,7 +49,7 @@ const plots = metrics.map((metric) => {
 
   return Plot.plot({
     title: metric.name.toUpperCase(),
-    width: 1400,
+    width: plotWidth,
     height: 180,
     marginLeft: 80,
     marginBottom: 50,
@@ -62,7 +69,7 @@ const plots = metrics.map((metric) => {
         fill: metric.color,
         opacity: (d) => 0.5 + 0.5 * (d.num_blocks / maxBlocks),
         title: (d) =>
-          `Bucket: ${d.ms_bucket}ms - ${d.ms_bucket + 200}ms\n${metric.name}: ${d.value.toFixed(9)} ETH\nBlocks: ${d.num_blocks}`,
+          `Bucket: ${d.ms_bucket}ms - ${d.ms_bucket + bucketSize}ms\n${metric.name}: ${d.value.toFixed(9)} ETH\nBlocks: ${d.num_blocks}`,
       }),
       Plot.ruleY([0]),
       // Add ETH value on top of bars
@@ -97,7 +104,7 @@ const maxData = data.map((d) => ({
 
 const lastPlot = Plot.plot({
   title: "MAX",
-  width: 1400,
+  width: plotWidth,
   height: 180,
   marginLeft: 80,
   marginBottom: 60,
@@ -117,7 +124,7 @@ const lastPlot = Plot.plot({
       fill: "#59a14f",
       opacity: (d) => 0.5 + 0.5 * (d.num_blocks / maxBlocks),
       title: (d) =>
-        `Bucket: ${d.ms_bucket}ms - ${d.ms_bucket + 200}ms\nmax: ${d.value.toFixed(9)} ETH\nBlocks: ${d.num_blocks}`,
+        `Bucket: ${d.ms_bucket}ms - ${d.ms_bucket + bucketSize}ms\nmax: ${d.value.toFixed(9)} ETH\nBlocks: ${d.num_blocks}`,
     }),
     Plot.ruleY([0]),
     // Add ETH value on top of bars
@@ -158,12 +165,11 @@ const htmlContent = `
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Bid Value Increases per 200ms Bucket</title>
+  <title>Bid Value Increases per ${bucketSize}ms Bucket</title>
   <style>
     body {
       font-family: system-ui, sans-serif;
       padding: 20px;
-      max-width: 1500px;
       margin: 0 auto;
     }
     h1 {
@@ -173,6 +179,18 @@ const htmlContent = `
       margin-top: 0;
       color: #666;
       font-weight: normal;
+    }
+    .scroll-container {
+      overflow-x: auto;
+      overflow-y: hidden;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 10px;
+      background: #fafafa;
+    }
+    .plots-wrapper {
+      min-width: ${plotWidth}px;
     }
     .plot-container {
       margin-bottom: 20px;
@@ -199,9 +217,13 @@ const htmlContent = `
   </style>
 </head>
 <body>
-  <h1>Bid Value Increases per 200ms Bucket</h1>
+  <h1>Bid Value Increases per ${bucketSize}ms Bucket</h1>
   <h2>${blockRangeText}</h2>
-  ${plots.map((plot) => `<div class="plot-container">${plot.outerHTML}</div>`).join("\n")}
+  <div class="scroll-container">
+    <div class="plots-wrapper">
+      ${plots.map((plot) => `<div class="plot-container">${plot.outerHTML}</div>`).join("\n")}
+    </div>
+  </div>
 </body>
 </html>
 `;
