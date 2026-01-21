@@ -21,9 +21,9 @@ trace-aggregate-csv START_BLOCK AMOUNT:
     @just query "{{ shell('./trace-aggregate-csv.sh $1 $2', START_BLOCK, AMOUNT) }}"
 
 # Generate bar chart plot from aggregated data
-plot START_BLOCK AMOUNT OUTPUT="output.html":
+plot START_BLOCK AMOUNT OUTPUT="index.html":
     @echo "Fetching data for blocks {{ START_BLOCK }} to {{ START_BLOCK }} + {{ AMOUNT }}..."
     @just trace-aggregate-csv {{ START_BLOCK }} {{ AMOUNT }} > data.csv
     @echo "Generating plot..."
-    @bun run plot-trace.js data.csv {{ OUTPUT }}
+    @bun run plot-trace.js data.csv {{ OUTPUT }} {{ START_BLOCK }} {{ AMOUNT }}
     @echo "Done! Open {{ OUTPUT }} in a browser to view."

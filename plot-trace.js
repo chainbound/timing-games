@@ -13,7 +13,9 @@ import { readFileSync, writeFileSync } from "fs";
 
 // Parse command line arguments
 const csvFile = process.argv[2] || "data.csv";
-const outputFile = process.argv[3] || "output.html";
+const outputFile = process.argv[3] || "index.html";
+const startBlock = process.argv[4] || "unknown";
+const amount = process.argv[5] || "unknown";
 
 // Read and parse CSV data
 const csvData = readFileSync(csvFile, "utf-8");
@@ -63,15 +65,24 @@ const plots = metrics.map((metric) => {
           `Bucket: ${d.ms_bucket}ms - ${d.ms_bucket + 200}ms\n${metric.name}: ${d.value.toFixed(9)} ETH\nBlocks: ${d.num_blocks}`,
       }),
       Plot.ruleY([0]),
-      // Add text labels on top of bars showing num_blocks
+      // Add ETH value on top of bars
       Plot.text(metricData, {
         x: "ms_bucket",
         y: "value",
-        text: (d) => d.num_blocks,
+        text: (d) => d.value.toFixed(6),
         dy: -5,
-        fontSize: 10,
+        fontSize: 9,
         fill: "#333",
         fontWeight: "bold",
+      }),
+      // Add observation count below x-axis labels (in grey)
+      Plot.text(metricData, {
+        x: "ms_bucket",
+        y: 0,
+        text: (d) => d.num_blocks,
+        dy: 25,
+        fontSize: 9,
+        fill: "#999",
       }),
     ],
   });
@@ -109,15 +120,24 @@ const lastPlot = Plot.plot({
         `Bucket: ${d.ms_bucket}ms - ${d.ms_bucket + 200}ms\nmax: ${d.value.toFixed(9)} ETH\nBlocks: ${d.num_blocks}`,
     }),
     Plot.ruleY([0]),
-    // Add text labels on top of bars showing num_blocks
+    // Add ETH value on top of bars
     Plot.text(maxData, {
       x: "ms_bucket",
       y: "value",
-      text: (d) => d.num_blocks,
+      text: (d) => d.value.toFixed(6),
       dy: -5,
-      fontSize: 10,
+      fontSize: 9,
       fill: "#333",
       fontWeight: "bold",
+    }),
+    // Add observation count below x-axis labels (in grey)
+    Plot.text(maxData, {
+      x: "ms_bucket",
+      y: 0,
+      text: (d) => d.num_blocks,
+      dy: 35,
+      fontSize: 9,
+      fill: "#999",
     }),
   ],
 });
@@ -126,6 +146,13 @@ const lastPlot = Plot.plot({
 plots[plots.length - 1] = lastPlot;
 
 // Combine all plots into one HTML document
+const endBlock = startBlock !== "unknown" && amount !== "unknown"
+  ? parseInt(startBlock) + parseInt(amount) - 1
+  : "unknown";
+const blockRangeText = startBlock !== "unknown" && endBlock !== "unknown"
+  ? `Blocks ${startBlock} - ${endBlock} (${amount} blocks)`
+  : `${data[0]?.num_blocks || "N/A"} blocks`;
+
 const htmlContent = `
 <!DOCTYPE html>
 <html>
@@ -173,7 +200,7 @@ const htmlContent = `
 </head>
 <body>
   <h1>Bid Value Increases per 200ms Bucket</h1>
-  <h2>Aggregated across ${data[0]?.num_blocks || "N/A"} blocks</h2>
+  <h2>${blockRangeText}</h2>
   ${plots.map((plot) => `<div class="plot-container">${plot.outerHTML}</div>`).join("\n")}
 </body>
 </html>
