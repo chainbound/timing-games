@@ -41,21 +41,25 @@ This will create `output.html` with interactive bar charts showing bid value inc
 
 ## GitHub Pages Deployment
 
-The workflow automatically deploys charts to GitHub Pages.
+The workflow automatically deploys `index.html` to GitHub Pages when pushed to `main`.
 
 ### Setup
 
 1. Go to your repository Settings → Pages
 2. Under "Build and deployment", set Source to "GitHub Actions"
-3. Add repository secrets (Settings → Secrets → Actions):
-   - `XATU_USERNAME`: Your Xatu database username
-   - `XATU_PASSWORD`: Your Xatu database password
 
 ### Deploy
 
-**Automatic**: Push to `main` branch (uses default: 100 blocks starting from 24250508)
+1. Generate your chart locally:
+   ```bash
+   just plot 24250508 100 index.html
+   ```
 
-**Manual**: Go to Actions → Deploy to GitHub Pages → Run workflow
-- Customize start block and number of blocks to analyze
+2. Commit and push `index.html` to `main`:
+   ```bash
+   git add index.html
+   git commit -m "Update chart"
+   git push
+   ```
 
-Your chart will be available at: `https://<username>.github.io/<repo-name>/index.html`
+Your chart will be available at: `https://<username>.github.io/<repo-name>/`

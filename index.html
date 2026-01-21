@@ -1,0 +1,315 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Bid Value Increases per 200ms Bucket</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      padding: 20px;
+      max-width: 1500px;
+      margin: 0 auto;
+    }
+    h1 {
+      margin-bottom: 5px;
+    }
+    h2 {
+      margin-top: 0;
+      color: #666;
+      font-weight: normal;
+    }
+    .plot-container {
+      margin-bottom: 20px;
+    }
+    /* Enhanced tooltip styling */
+    [aria-label][role="img"] {
+      background: white !important;
+      border: 2px solid #333 !important;
+      border-radius: 6px !important;
+      padding: 12px !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
+      pointer-events: none !important;
+      white-space: pre !important;
+      line-height: 1.6 !important;
+    }
+    /* Highlight bars on hover */
+    rect:hover {
+      opacity: 1 !important;
+      filter: brightness(1.1);
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Bid Value Increases per 200ms Bucket</h1>
+  <h2>Aggregated across 68655 blocks</h2>
+  <div class="plot-container"><figure class="plot-d6a7b5-figure" style="max-width: initial;"><h2>MEAN</h2><svg class="plot-d6a7b5" fill="currentColor" font-family="system-ui, sans-serif" font-size="10" text-anchor="middle" width="1400" height="180" viewBox="0 0 1400 180"><style>:where(.plot-d6a7b5) {
+  --plot-background: white;
+  display: block;
+  height: auto;
+  height: intrinsic;
+  max-width: 100%;
+}
+:where(.plot-d6a7b5 text),
+:where(.plot-d6a7b5 tspan) {
+  white-space: pre;
+}</style><g aria-label="y-grid" aria-hidden="true" stroke="currentColor" stroke-opacity="0.1"><line x1="80" x2="1380" y1="130" y2="130"></line><line x1="80" x2="1380" y1="85.17745648380952" y2="85.17745648380952"></line><line x1="80" x2="1380" y1="40.354912967619036" y2="40.354912967619036"></line></g><g aria-label="y-axis tick" aria-hidden="true" fill="none" stroke="currentColor"><path transform="translate(80,130)" d="M0,0L-6,0"></path><path transform="translate(80,85.17745648380952)" d="M0,0L-6,0"></path><path transform="translate(80,40.354912967619036)" d="M0,0L-6,0"></path></g><g aria-label="y-axis tick label" text-anchor="end" font-variant="tabular-nums" transform="translate(-9,0)"><text y="0.32em" transform="translate(80,130)">0.000</text><text y="0.32em" transform="translate(80,85.17745648380952)">0.005</text><text y="0.32em" transform="translate(80,40.354912967619036)">0.010</text></g><g aria-label="y-axis label" text-anchor="start" transform="translate(-77,-27)"><text y="0.71em" transform="translate(80,30)">↑ ETH</text></g><g aria-label="x-axis tick" aria-hidden="true" fill="none" stroke="currentColor" transform="translate(27.5,0)"><path transform="translate(93,130)" d="M0,0L0,6"></path><path transform="translate(154,130)" d="M0,0L0,6"></path><path transform="translate(215,130)" d="M0,0L0,6"></path><path transform="translate(276,130)" d="M0,0L0,6"></path><path transform="translate(337,130)" d="M0,0L0,6"></path><path transform="translate(398,130)" d="M0,0L0,6"></path><path transform="translate(459,130)" d="M0,0L0,6"></path><path transform="translate(520,130)" d="M0,0L0,6"></path><path transform="translate(581,130)" d="M0,0L0,6"></path><path transform="translate(642,130)" d="M0,0L0,6"></path><path transform="translate(703,130)" d="M0,0L0,6"></path><path transform="translate(764,130)" d="M0,0L0,6"></path><path transform="translate(825,130)" d="M0,0L0,6"></path><path transform="translate(886,130)" d="M0,0L0,6"></path><path transform="translate(947,130)" d="M0,0L0,6"></path><path transform="translate(1008,130)" d="M0,0L0,6"></path><path transform="translate(1069,130)" d="M0,0L0,6"></path><path transform="translate(1130,130)" d="M0,0L0,6"></path><path transform="translate(1191,130)" d="M0,0L0,6"></path><path transform="translate(1252,130)" d="M0,0L0,6"></path><path transform="translate(1313,130)" d="M0,0L0,6"></path></g><g aria-label="x-axis tick label" transform="translate(27.5,9)"><text y="0.71em" transform="translate(93,130)">0ms</text><text y="0.71em" transform="translate(154,130)">200ms</text><text y="0.71em" transform="translate(215,130)">400ms</text><text y="0.71em" transform="translate(276,130)">600ms</text><text y="0.71em" transform="translate(337,130)">800ms</text><text y="0.71em" transform="translate(398,130)">1000ms</text><text y="0.71em" transform="translate(459,130)">1200ms</text><text y="0.71em" transform="translate(520,130)">1400ms</text><text y="0.71em" transform="translate(581,130)">1600ms</text><text y="0.71em" transform="translate(642,130)">1800ms</text><text y="0.71em" transform="translate(703,130)">2000ms</text><text y="0.71em" transform="translate(764,130)">2200ms</text><text y="0.71em" transform="translate(825,130)">2400ms</text><text y="0.71em" transform="translate(886,130)">2600ms</text><text y="0.71em" transform="translate(947,130)">2800ms</text><text y="0.71em" transform="translate(1008,130)">3000ms</text><text y="0.71em" transform="translate(1069,130)">3200ms</text><text y="0.71em" transform="translate(1130,130)">3400ms</text><text y="0.71em" transform="translate(1191,130)">3600ms</text><text y="0.71em" transform="translate(1252,130)">3800ms</text><text y="0.71em" transform="translate(1313,130)">4000ms</text></g><g aria-label="bar" fill="#4e79a7"><rect x="93" width="55" y="30" height="100" opacity="1"><title>Bucket: 0ms - 200ms
+mean: 0.011155101 ETH
+Blocks: 68655</title></rect><rect x="154" width="55" y="125.08259943141707" height="4.917400568582934" opacity="0.9368072245284393"><title>Bucket: 200ms - 400ms
+mean: 0.000548541 ETH
+Blocks: 59978</title></rect><rect x="215" width="55" y="125.01908588725463" height="4.980914112745367" opacity="0.9239822299905324"><title>Bucket: 400ms - 600ms
+mean: 0.000555626 ETH
+Blocks: 58217</title></rect><rect x="276" width="55" y="125.90612402344004" height="4.093875976559957" opacity="0.9133857694268444"><title>Bucket: 600ms - 800ms
+mean: 0.000456676 ETH
+Blocks: 56762</title></rect><rect x="337" width="55" y="114.64842227784402" height="15.35157772215598" opacity="0.9541257009686112"><title>Bucket: 800ms - 1000ms
+mean: 0.001712484 ETH
+Blocks: 62356</title></rect><rect x="398" width="55" y="118.67715316965754" height="11.322846830342456" opacity="0.9392105454810283"><title>Bucket: 1000ms - 1200ms
+mean: 0.001263075 ETH
+Blocks: 60308</title></rect><rect x="459" width="55" y="124.47660760758689" height="5.523392392413115" opacity="0.9052363265603379"><title>Bucket: 1200ms - 1400ms
+mean: 0.000616140 ETH
+Blocks: 55643</title></rect><rect x="520" width="55" y="125.72154478924035" height="4.278455210759645" opacity="0.8875391450003641"><title>Bucket: 1400ms - 1600ms
+mean: 0.000477266 ETH
+Blocks: 53213</title></rect><rect x="581" width="55" y="125.29010091437092" height="4.709899085629075" opacity="0.8612191391741315"><title>Bucket: 1600ms - 1800ms
+mean: 0.000525394 ETH
+Blocks: 49599</title></rect><rect x="642" width="55" y="126.08568313276591" height="3.914316867234092" opacity="0.7994100939480009"><title>Bucket: 1800ms - 2000ms
+mean: 0.000436646 ETH
+Blocks: 41112</title></rect><rect x="703" width="55" y="125.48046225668418" height="4.519537743315823" opacity="0.7532299177044643"><title>Bucket: 2000ms - 2200ms
+mean: 0.000504159 ETH
+Blocks: 34771</title></rect><rect x="764" width="55" y="121.62250525566735" height="8.377494744332651" opacity="0.7215060811302891"><title>Bucket: 2200ms - 2400ms
+mean: 0.000934518 ETH
+Blocks: 30415</title></rect><rect x="825" width="55" y="106.60576089808599" height="23.39423910191401" opacity="0.7082659675187531"><title>Bucket: 2400ms - 2600ms
+mean: 0.002609651 ETH
+Blocks: 28597</title></rect><rect x="886" width="55" y="91.40602402434544" height="38.59397597565456" opacity="0.6914208724783337"><title>Bucket: 2600ms - 2800ms
+mean: 0.004305197 ETH
+Blocks: 26284</title></rect><rect x="947" width="55" y="95.5375150794242" height="34.462484920575804" opacity="0.6599519335809483"><title>Bucket: 2800ms - 3000ms
+mean: 0.003844325 ETH
+Blocks: 21963</title></rect><rect x="1008" width="55" y="109.56734770935736" height="20.432652290642636" opacity="0.6259704318694924"><title>Bucket: 3000ms - 3200ms
+mean: 0.002279283 ETH
+Blocks: 17297</title></rect><rect x="1069" width="55" y="111.66285540579148" height="18.337144594208524" opacity="0.6030369237491807"><title>Bucket: 3200ms - 3400ms
+mean: 0.002045527 ETH
+Blocks: 14148</title></rect><rect x="1130" width="55" y="97.95240132742859" height="32.04759867257141" opacity="0.5827470686767169"><title>Bucket: 3400ms - 3600ms
+mean: 0.003574942 ETH
+Blocks: 11362</title></rect><rect x="1191" width="55" y="101.67163255626284" height="28.328367443737164" opacity="0.5657344694486928"><title>Bucket: 3600ms - 3800ms
+mean: 0.003160058 ETH
+Blocks: 9026</title></rect><rect x="1252" width="55" y="121.27754199625804" height="8.722458003741963" opacity="0.5491078581312359"><title>Bucket: 3800ms - 4000ms
+mean: 0.000972999 ETH
+Blocks: 6743</title></rect><rect x="1313" width="55" y="127.937777524381" height="2.062222475618995" opacity="0.5007137134950113"><title>Bucket: 4000ms - 4200ms
+mean: 0.000230043 ETH
+Blocks: 98</title></rect></g><g aria-label="rule" stroke="currentColor"><line x1="80" x2="1380" y1="130" y2="130"></line></g><g aria-label="text" fill="#333" font-size="10" font-variant="tabular-nums" font-weight="bold" transform="translate(27.5,-5)"><text y="0.32em" transform="translate(93,30)">68,655</text><text y="0.32em" transform="translate(154,125.08259943141707)">59,978</text><text y="0.32em" transform="translate(215,125.01908588725463)">58,217</text><text y="0.32em" transform="translate(276,125.90612402344004)">56,762</text><text y="0.32em" transform="translate(337,114.64842227784402)">62,356</text><text y="0.32em" transform="translate(398,118.67715316965754)">60,308</text><text y="0.32em" transform="translate(459,124.47660760758689)">55,643</text><text y="0.32em" transform="translate(520,125.72154478924035)">53,213</text><text y="0.32em" transform="translate(581,125.29010091437092)">49,599</text><text y="0.32em" transform="translate(642,126.08568313276591)">41,112</text><text y="0.32em" transform="translate(703,125.48046225668418)">34,771</text><text y="0.32em" transform="translate(764,121.62250525566735)">30,415</text><text y="0.32em" transform="translate(825,106.60576089808599)">28,597</text><text y="0.32em" transform="translate(886,91.40602402434544)">26,284</text><text y="0.32em" transform="translate(947,95.5375150794242)">21,963</text><text y="0.32em" transform="translate(1008,109.56734770935736)">17,297</text><text y="0.32em" transform="translate(1069,111.66285540579148)">14,148</text><text y="0.32em" transform="translate(1130,97.95240132742859)">11,362</text><text y="0.32em" transform="translate(1191,101.67163255626284)">9,026</text><text y="0.32em" transform="translate(1252,121.27754199625804)">6,743</text><text y="0.32em" transform="translate(1313,127.937777524381)">98</text></g></svg></figure></div>
+<div class="plot-container"><figure class="plot-d6a7b5-figure" style="max-width: initial;"><h2>P50</h2><svg class="plot-d6a7b5" fill="currentColor" font-family="system-ui, sans-serif" font-size="10" text-anchor="middle" width="1400" height="180" viewBox="0 0 1400 180"><style>:where(.plot-d6a7b5) {
+  --plot-background: white;
+  display: block;
+  height: auto;
+  height: intrinsic;
+  max-width: 100%;
+}
+:where(.plot-d6a7b5 text),
+:where(.plot-d6a7b5 tspan) {
+  white-space: pre;
+}</style><g aria-label="y-grid" aria-hidden="true" stroke="currentColor" stroke-opacity="0.1"><line x1="80" x2="1380" y1="130" y2="130"></line><line x1="80" x2="1380" y1="103.98303251431486" y2="103.98303251431486"></line><line x1="80" x2="1380" y1="77.96606502862973" y2="77.96606502862973"></line><line x1="80" x2="1380" y1="51.94909754294457" y2="51.94909754294457"></line></g><g aria-label="y-axis tick" aria-hidden="true" fill="none" stroke="currentColor"><path transform="translate(80,130)" d="M0,0L-6,0"></path><path transform="translate(80,103.98303251431486)" d="M0,0L-6,0"></path><path transform="translate(80,77.96606502862973)" d="M0,0L-6,0"></path><path transform="translate(80,51.94909754294457)" d="M0,0L-6,0"></path></g><g aria-label="y-axis tick label" text-anchor="end" font-variant="tabular-nums" transform="translate(-9,0)"><text y="0.32em" transform="translate(80,130)">0.000</text><text y="0.32em" transform="translate(80,103.98303251431486)">0.002</text><text y="0.32em" transform="translate(80,77.96606502862973)">0.004</text><text y="0.32em" transform="translate(80,51.94909754294457)">0.006</text></g><g aria-label="y-axis label" text-anchor="start" transform="translate(-77,-27)"><text y="0.71em" transform="translate(80,30)">↑ ETH</text></g><g aria-label="x-axis tick" aria-hidden="true" fill="none" stroke="currentColor" transform="translate(27.5,0)"><path transform="translate(93,130)" d="M0,0L0,6"></path><path transform="translate(154,130)" d="M0,0L0,6"></path><path transform="translate(215,130)" d="M0,0L0,6"></path><path transform="translate(276,130)" d="M0,0L0,6"></path><path transform="translate(337,130)" d="M0,0L0,6"></path><path transform="translate(398,130)" d="M0,0L0,6"></path><path transform="translate(459,130)" d="M0,0L0,6"></path><path transform="translate(520,130)" d="M0,0L0,6"></path><path transform="translate(581,130)" d="M0,0L0,6"></path><path transform="translate(642,130)" d="M0,0L0,6"></path><path transform="translate(703,130)" d="M0,0L0,6"></path><path transform="translate(764,130)" d="M0,0L0,6"></path><path transform="translate(825,130)" d="M0,0L0,6"></path><path transform="translate(886,130)" d="M0,0L0,6"></path><path transform="translate(947,130)" d="M0,0L0,6"></path><path transform="translate(1008,130)" d="M0,0L0,6"></path><path transform="translate(1069,130)" d="M0,0L0,6"></path><path transform="translate(1130,130)" d="M0,0L0,6"></path><path transform="translate(1191,130)" d="M0,0L0,6"></path><path transform="translate(1252,130)" d="M0,0L0,6"></path><path transform="translate(1313,130)" d="M0,0L0,6"></path></g><g aria-label="x-axis tick label" transform="translate(27.5,9)"><text y="0.71em" transform="translate(93,130)">0ms</text><text y="0.71em" transform="translate(154,130)">200ms</text><text y="0.71em" transform="translate(215,130)">400ms</text><text y="0.71em" transform="translate(276,130)">600ms</text><text y="0.71em" transform="translate(337,130)">800ms</text><text y="0.71em" transform="translate(398,130)">1000ms</text><text y="0.71em" transform="translate(459,130)">1200ms</text><text y="0.71em" transform="translate(520,130)">1400ms</text><text y="0.71em" transform="translate(581,130)">1600ms</text><text y="0.71em" transform="translate(642,130)">1800ms</text><text y="0.71em" transform="translate(703,130)">2000ms</text><text y="0.71em" transform="translate(764,130)">2200ms</text><text y="0.71em" transform="translate(825,130)">2400ms</text><text y="0.71em" transform="translate(886,130)">2600ms</text><text y="0.71em" transform="translate(947,130)">2800ms</text><text y="0.71em" transform="translate(1008,130)">3000ms</text><text y="0.71em" transform="translate(1069,130)">3200ms</text><text y="0.71em" transform="translate(1130,130)">3400ms</text><text y="0.71em" transform="translate(1191,130)">3600ms</text><text y="0.71em" transform="translate(1252,130)">3800ms</text><text y="0.71em" transform="translate(1313,130)">4000ms</text></g><g aria-label="bar" fill="#f28e2c"><rect x="93" width="55" y="30" height="100" opacity="1"><title>Bucket: 0ms - 200ms
+p50: 0.007687291 ETH
+Blocks: 68655</title></rect><rect x="154" width="55" y="129.22789445592733" height="0.772105544072673" opacity="0.9368072245284393"><title>Bucket: 200ms - 400ms
+p50: 0.000059354 ETH
+Blocks: 59978</title></rect><rect x="215" width="55" y="129.27652016815807" height="0.723479831841928" opacity="0.9239822299905324"><title>Bucket: 400ms - 600ms
+p50: 0.000055616 ETH
+Blocks: 58217</title></rect><rect x="276" width="55" y="129.33893487315623" height="0.6610651268437664" opacity="0.9133857694268444"><title>Bucket: 600ms - 800ms
+p50: 0.000050818 ETH
+Blocks: 56762</title></rect><rect x="337" width="55" y="125.858397971405" height="4.141602028595003" opacity="0.9541257009686112"><title>Bucket: 800ms - 1000ms
+p50: 0.000318377 ETH
+Blocks: 62356</title></rect><rect x="398" width="55" y="128.8924056601994" height="1.1075943398006132" opacity="0.9392105454810283"><title>Bucket: 1000ms - 1200ms
+p50: 0.000085144 ETH
+Blocks: 60308</title></rect><rect x="459" width="55" y="129.29479708781676" height="0.705202912183239" opacity="0.9052363265603379"><title>Bucket: 1200ms - 1400ms
+p50: 0.000054211 ETH
+Blocks: 55643</title></rect><rect x="520" width="55" y="129.2079394418658" height="0.7920605581342102" opacity="0.8875391450003641"><title>Bucket: 1400ms - 1600ms
+p50: 0.000060888 ETH
+Blocks: 53213</title></rect><rect x="581" width="55" y="129.1154231054867" height="0.8845768945132875" opacity="0.8612191391741315"><title>Bucket: 1600ms - 1800ms
+p50: 0.000068000 ETH
+Blocks: 49599</title></rect><rect x="642" width="55" y="129.3853491431507" height="0.6146508568492948" opacity="0.7994100939480009"><title>Bucket: 1800ms - 2000ms
+p50: 0.000047250 ETH
+Blocks: 41112</title></rect><rect x="703" width="55" y="129.55426430455148" height="0.4457356954485192" opacity="0.7532299177044643"><title>Bucket: 2000ms - 2200ms
+p50: 0.000034265 ETH
+Blocks: 34771</title></rect><rect x="764" width="55" y="129.58920509188476" height="0.41079490811523556" opacity="0.7215060811302891"><title>Bucket: 2200ms - 2400ms
+p50: 0.000031579 ETH
+Blocks: 30415</title></rect><rect x="825" width="55" y="129.40912865143264" height="0.5908713485673616" opacity="0.7082659675187531"><title>Bucket: 2400ms - 2600ms
+p50: 0.000045422 ETH
+Blocks: 28597</title></rect><rect x="886" width="55" y="129.03333957306936" height="0.9666604269306447" opacity="0.6914208724783337"><title>Bucket: 2600ms - 2800ms
+p50: 0.000074310 ETH
+Blocks: 26284</title></rect><rect x="947" width="55" y="128.934514122075" height="1.0654858779249992" opacity="0.6599519335809483"><title>Bucket: 2800ms - 3000ms
+p50: 0.000081907 ETH
+Blocks: 21963</title></rect><rect x="1008" width="55" y="129.19402036426095" height="0.8059796357390496" opacity="0.6259704318694924"><title>Bucket: 3000ms - 3200ms
+p50: 0.000061958 ETH
+Blocks: 17297</title></rect><rect x="1069" width="55" y="129.60581692562437" height="0.3941830743756327" opacity="0.6030369237491807"><title>Bucket: 3200ms - 3400ms
+p50: 0.000030302 ETH
+Blocks: 14148</title></rect><rect x="1130" width="55" y="129.91453426180954" height="0.08546573819046444" opacity="0.5827470686767169"><title>Bucket: 3400ms - 3600ms
+p50: 0.000006570 ETH
+Blocks: 11362</title></rect><rect x="1191" width="55" y="129.99703406570666" height="0.002965934293342798" opacity="0.5657344694486928"><title>Bucket: 3600ms - 3800ms
+p50: 0.000000228 ETH
+Blocks: 9026</title></rect><rect x="1252" width="55" y="129.99973983032515" height="0.0002601696748456561" opacity="0.5491078581312359"><title>Bucket: 3800ms - 4000ms
+p50: 0.000000020 ETH
+Blocks: 6743</title></rect><rect x="1313" width="55" y="129.99973983032515" height="0.0002601696748456561" opacity="0.5007137134950113"><title>Bucket: 4000ms - 4200ms
+p50: 0.000000020 ETH
+Blocks: 98</title></rect></g><g aria-label="rule" stroke="currentColor"><line x1="80" x2="1380" y1="130" y2="130"></line></g><g aria-label="text" fill="#333" font-size="10" font-variant="tabular-nums" font-weight="bold" transform="translate(27.5,-5)"><text y="0.32em" transform="translate(93,30)">68,655</text><text y="0.32em" transform="translate(154,129.22789445592733)">59,978</text><text y="0.32em" transform="translate(215,129.27652016815807)">58,217</text><text y="0.32em" transform="translate(276,129.33893487315623)">56,762</text><text y="0.32em" transform="translate(337,125.858397971405)">62,356</text><text y="0.32em" transform="translate(398,128.8924056601994)">60,308</text><text y="0.32em" transform="translate(459,129.29479708781676)">55,643</text><text y="0.32em" transform="translate(520,129.2079394418658)">53,213</text><text y="0.32em" transform="translate(581,129.1154231054867)">49,599</text><text y="0.32em" transform="translate(642,129.3853491431507)">41,112</text><text y="0.32em" transform="translate(703,129.55426430455148)">34,771</text><text y="0.32em" transform="translate(764,129.58920509188476)">30,415</text><text y="0.32em" transform="translate(825,129.40912865143264)">28,597</text><text y="0.32em" transform="translate(886,129.03333957306936)">26,284</text><text y="0.32em" transform="translate(947,128.934514122075)">21,963</text><text y="0.32em" transform="translate(1008,129.19402036426095)">17,297</text><text y="0.32em" transform="translate(1069,129.60581692562437)">14,148</text><text y="0.32em" transform="translate(1130,129.91453426180954)">11,362</text><text y="0.32em" transform="translate(1191,129.99703406570666)">9,026</text><text y="0.32em" transform="translate(1252,129.99973983032515)">6,743</text><text y="0.32em" transform="translate(1313,129.99973983032515)">98</text></g></svg></figure></div>
+<div class="plot-container"><figure class="plot-d6a7b5-figure" style="max-width: initial;"><h2>P95</h2><svg class="plot-d6a7b5" fill="currentColor" font-family="system-ui, sans-serif" font-size="10" text-anchor="middle" width="1400" height="180" viewBox="0 0 1400 180"><style>:where(.plot-d6a7b5) {
+  --plot-background: white;
+  display: block;
+  height: auto;
+  height: intrinsic;
+  max-width: 100%;
+}
+:where(.plot-d6a7b5 text),
+:where(.plot-d6a7b5 tspan) {
+  white-space: pre;
+}</style><g aria-label="y-grid" aria-hidden="true" stroke="currentColor" stroke-opacity="0.1"><line x1="80" x2="1380" y1="130" y2="130"></line><line x1="80" x2="1380" y1="85.19313773943107" y2="85.19313773943107"></line><line x1="80" x2="1380" y1="40.38627547886214" y2="40.38627547886214"></line></g><g aria-label="y-axis tick" aria-hidden="true" fill="none" stroke="currentColor"><path transform="translate(80,130)" d="M0,0L-6,0"></path><path transform="translate(80,85.19313773943107)" d="M0,0L-6,0"></path><path transform="translate(80,40.38627547886214)" d="M0,0L-6,0"></path></g><g aria-label="y-axis tick label" text-anchor="end" font-variant="tabular-nums" transform="translate(-9,0)"><text y="0.32em" transform="translate(80,130)">0.00</text><text y="0.32em" transform="translate(80,85.19313773943107)">0.01</text><text y="0.32em" transform="translate(80,40.38627547886214)">0.02</text></g><g aria-label="y-axis label" text-anchor="start" transform="translate(-77,-27)"><text y="0.71em" transform="translate(80,30)">↑ ETH</text></g><g aria-label="x-axis tick" aria-hidden="true" fill="none" stroke="currentColor" transform="translate(27.5,0)"><path transform="translate(93,130)" d="M0,0L0,6"></path><path transform="translate(154,130)" d="M0,0L0,6"></path><path transform="translate(215,130)" d="M0,0L0,6"></path><path transform="translate(276,130)" d="M0,0L0,6"></path><path transform="translate(337,130)" d="M0,0L0,6"></path><path transform="translate(398,130)" d="M0,0L0,6"></path><path transform="translate(459,130)" d="M0,0L0,6"></path><path transform="translate(520,130)" d="M0,0L0,6"></path><path transform="translate(581,130)" d="M0,0L0,6"></path><path transform="translate(642,130)" d="M0,0L0,6"></path><path transform="translate(703,130)" d="M0,0L0,6"></path><path transform="translate(764,130)" d="M0,0L0,6"></path><path transform="translate(825,130)" d="M0,0L0,6"></path><path transform="translate(886,130)" d="M0,0L0,6"></path><path transform="translate(947,130)" d="M0,0L0,6"></path><path transform="translate(1008,130)" d="M0,0L0,6"></path><path transform="translate(1069,130)" d="M0,0L0,6"></path><path transform="translate(1130,130)" d="M0,0L0,6"></path><path transform="translate(1191,130)" d="M0,0L0,6"></path><path transform="translate(1252,130)" d="M0,0L0,6"></path><path transform="translate(1313,130)" d="M0,0L0,6"></path></g><g aria-label="x-axis tick label" transform="translate(27.5,9)"><text y="0.71em" transform="translate(93,130)">0ms</text><text y="0.71em" transform="translate(154,130)">200ms</text><text y="0.71em" transform="translate(215,130)">400ms</text><text y="0.71em" transform="translate(276,130)">600ms</text><text y="0.71em" transform="translate(337,130)">800ms</text><text y="0.71em" transform="translate(398,130)">1000ms</text><text y="0.71em" transform="translate(459,130)">1200ms</text><text y="0.71em" transform="translate(520,130)">1400ms</text><text y="0.71em" transform="translate(581,130)">1600ms</text><text y="0.71em" transform="translate(642,130)">1800ms</text><text y="0.71em" transform="translate(703,130)">2000ms</text><text y="0.71em" transform="translate(764,130)">2200ms</text><text y="0.71em" transform="translate(825,130)">2400ms</text><text y="0.71em" transform="translate(886,130)">2600ms</text><text y="0.71em" transform="translate(947,130)">2800ms</text><text y="0.71em" transform="translate(1008,130)">3000ms</text><text y="0.71em" transform="translate(1069,130)">3200ms</text><text y="0.71em" transform="translate(1130,130)">3400ms</text><text y="0.71em" transform="translate(1191,130)">3600ms</text><text y="0.71em" transform="translate(1252,130)">3800ms</text><text y="0.71em" transform="translate(1313,130)">4000ms</text></g><g aria-label="bar" fill="#e15759"><rect x="93" width="55" y="30" height="100" opacity="1"><title>Bucket: 0ms - 200ms
+p95: 0.022318010 ETH
+Blocks: 68655</title></rect><rect x="154" width="55" y="123.31436360141429" height="6.685636398585714" opacity="0.9368072245284393"><title>Bucket: 200ms - 400ms
+p95: 0.001492101 ETH
+Blocks: 59978</title></rect><rect x="215" width="55" y="122.43422240602993" height="7.565777593970068" opacity="0.9239822299905324"><title>Bucket: 400ms - 600ms
+p95: 0.001688531 ETH
+Blocks: 58217</title></rect><rect x="276" width="55" y="124.01049197486694" height="5.989508025133063" opacity="0.9133857694268444"><title>Bucket: 600ms - 800ms
+p95: 0.001336739 ETH
+Blocks: 56762</title></rect><rect x="337" width="55" y="106.46844409515005" height="23.531555904849952" opacity="0.9541257009686112"><title>Bucket: 800ms - 1000ms
+p95: 0.005251775 ETH
+Blocks: 62356</title></rect><rect x="398" width="55" y="107.64646131084267" height="22.353538689157332" opacity="0.9392105454810283"><title>Bucket: 1000ms - 1200ms
+p95: 0.004988865 ETH
+Blocks: 60308</title></rect><rect x="459" width="55" y="121.47093311634865" height="8.529066883651353" opacity="0.9052363265603379"><title>Bucket: 1200ms - 1400ms
+p95: 0.001903518 ETH
+Blocks: 55643</title></rect><rect x="520" width="55" y="123.70136047075881" height="6.298639529241186" opacity="0.8875391450003641"><title>Bucket: 1400ms - 1600ms
+p95: 0.001405731 ETH
+Blocks: 53213</title></rect><rect x="581" width="55" y="123.7429726037402" height="6.257027396259801" opacity="0.8612191391741315"><title>Bucket: 1600ms - 1800ms
+p95: 0.001396444 ETH
+Blocks: 49599</title></rect><rect x="642" width="55" y="124.49538287687837" height="5.504617123121633" opacity="0.7994100939480009"><title>Bucket: 1800ms - 2000ms
+p95: 0.001228521 ETH
+Blocks: 41112</title></rect><rect x="703" width="55" y="123.96020075266567" height="6.039799247334329" opacity="0.7532299177044643"><title>Bucket: 2000ms - 2200ms
+p95: 0.001347963 ETH
+Blocks: 34771</title></rect><rect x="764" width="55" y="115.60082641776754" height="14.399173582232464" opacity="0.7215060811302891"><title>Bucket: 2200ms - 2400ms
+p95: 0.003213609 ETH
+Blocks: 30415</title></rect><rect x="825" width="55" y="95.10422300196119" height="34.89577699803881" opacity="0.7082659675187531"><title>Bucket: 2400ms - 2600ms
+p95: 0.007788043 ETH
+Blocks: 28597</title></rect><rect x="886" width="55" y="74.55514626976151" height="55.44485373023849" opacity="0.6914208724783337"><title>Bucket: 2600ms - 2800ms
+p95: 0.012374188 ETH
+Blocks: 26284</title></rect><rect x="947" width="55" y="73.62769798920245" height="56.372302010797554" opacity="0.6599519335809483"><title>Bucket: 2800ms - 3000ms
+p95: 0.012581176 ETH
+Blocks: 21963</title></rect><rect x="1008" width="55" y="84.1278635505585" height="45.8721364494415" opacity="0.6259704318694924"><title>Bucket: 3000ms - 3200ms
+p95: 0.010237748 ETH
+Blocks: 17297</title></rect><rect x="1069" width="55" y="88.1766295471684" height="41.8233704528316" opacity="0.6030369237491807"><title>Bucket: 3200ms - 3400ms
+p95: 0.009334144 ETH
+Blocks: 14148</title></rect><rect x="1130" width="55" y="98.38626741362692" height="31.613732586373075" opacity="0.5827470686767169"><title>Bucket: 3400ms - 3600ms
+p95: 0.007055556 ETH
+Blocks: 11362</title></rect><rect x="1191" width="55" y="114.40634716088039" height="15.593652839119613" opacity="0.5657344694486928"><title>Bucket: 3600ms - 3800ms
+p95: 0.003480193 ETH
+Blocks: 9026</title></rect><rect x="1252" width="55" y="119.44741040979908" height="10.552589590200924" opacity="0.5491078581312359"><title>Bucket: 3800ms - 4000ms
+p95: 0.002355128 ETH
+Blocks: 6743</title></rect><rect x="1313" width="55" y="127.04991618876414" height="2.9500838112358565" opacity="0.5007137134950113"><title>Bucket: 4000ms - 4200ms
+p95: 0.000658400 ETH
+Blocks: 98</title></rect></g><g aria-label="rule" stroke="currentColor"><line x1="80" x2="1380" y1="130" y2="130"></line></g><g aria-label="text" fill="#333" font-size="10" font-variant="tabular-nums" font-weight="bold" transform="translate(27.5,-5)"><text y="0.32em" transform="translate(93,30)">68,655</text><text y="0.32em" transform="translate(154,123.31436360141429)">59,978</text><text y="0.32em" transform="translate(215,122.43422240602993)">58,217</text><text y="0.32em" transform="translate(276,124.01049197486694)">56,762</text><text y="0.32em" transform="translate(337,106.46844409515005)">62,356</text><text y="0.32em" transform="translate(398,107.64646131084267)">60,308</text><text y="0.32em" transform="translate(459,121.47093311634865)">55,643</text><text y="0.32em" transform="translate(520,123.70136047075881)">53,213</text><text y="0.32em" transform="translate(581,123.7429726037402)">49,599</text><text y="0.32em" transform="translate(642,124.49538287687837)">41,112</text><text y="0.32em" transform="translate(703,123.96020075266567)">34,771</text><text y="0.32em" transform="translate(764,115.60082641776754)">30,415</text><text y="0.32em" transform="translate(825,95.10422300196119)">28,597</text><text y="0.32em" transform="translate(886,74.55514626976151)">26,284</text><text y="0.32em" transform="translate(947,73.62769798920245)">21,963</text><text y="0.32em" transform="translate(1008,84.1278635505585)">17,297</text><text y="0.32em" transform="translate(1069,88.1766295471684)">14,148</text><text y="0.32em" transform="translate(1130,98.38626741362692)">11,362</text><text y="0.32em" transform="translate(1191,114.40634716088039)">9,026</text><text y="0.32em" transform="translate(1252,119.44741040979908)">6,743</text><text y="0.32em" transform="translate(1313,127.04991618876414)">98</text></g></svg></figure></div>
+<div class="plot-container"><figure class="plot-d6a7b5-figure" style="max-width: initial;"><h2>P99</h2><svg class="plot-d6a7b5" fill="currentColor" font-family="system-ui, sans-serif" font-size="10" text-anchor="middle" width="1400" height="180" viewBox="0 0 1400 180"><style>:where(.plot-d6a7b5) {
+  --plot-background: white;
+  display: block;
+  height: auto;
+  height: intrinsic;
+  max-width: 100%;
+}
+:where(.plot-d6a7b5 text),
+:where(.plot-d6a7b5 tspan) {
+  white-space: pre;
+}</style><g aria-label="y-grid" aria-hidden="true" stroke="currentColor" stroke-opacity="0.1"><line x1="80" x2="1380" y1="130" y2="130"></line><line x1="80" x2="1380" y1="99.08441054969138" y2="99.08441054969138"></line><line x1="80" x2="1380" y1="68.1688210993828" y2="68.1688210993828"></line><line x1="80" x2="1380" y1="37.25323164907419" y2="37.25323164907419"></line></g><g aria-label="y-axis tick" aria-hidden="true" fill="none" stroke="currentColor"><path transform="translate(80,130)" d="M0,0L-6,0"></path><path transform="translate(80,99.08441054969138)" d="M0,0L-6,0"></path><path transform="translate(80,68.1688210993828)" d="M0,0L-6,0"></path><path transform="translate(80,37.25323164907419)" d="M0,0L-6,0"></path></g><g aria-label="y-axis tick label" text-anchor="end" font-variant="tabular-nums" transform="translate(-9,0)"><text y="0.32em" transform="translate(80,130)">0.00</text><text y="0.32em" transform="translate(80,99.08441054969138)">0.02</text><text y="0.32em" transform="translate(80,68.1688210993828)">0.04</text><text y="0.32em" transform="translate(80,37.25323164907419)">0.06</text></g><g aria-label="y-axis label" text-anchor="start" transform="translate(-77,-27)"><text y="0.71em" transform="translate(80,30)">↑ ETH</text></g><g aria-label="x-axis tick" aria-hidden="true" fill="none" stroke="currentColor" transform="translate(27.5,0)"><path transform="translate(93,130)" d="M0,0L0,6"></path><path transform="translate(154,130)" d="M0,0L0,6"></path><path transform="translate(215,130)" d="M0,0L0,6"></path><path transform="translate(276,130)" d="M0,0L0,6"></path><path transform="translate(337,130)" d="M0,0L0,6"></path><path transform="translate(398,130)" d="M0,0L0,6"></path><path transform="translate(459,130)" d="M0,0L0,6"></path><path transform="translate(520,130)" d="M0,0L0,6"></path><path transform="translate(581,130)" d="M0,0L0,6"></path><path transform="translate(642,130)" d="M0,0L0,6"></path><path transform="translate(703,130)" d="M0,0L0,6"></path><path transform="translate(764,130)" d="M0,0L0,6"></path><path transform="translate(825,130)" d="M0,0L0,6"></path><path transform="translate(886,130)" d="M0,0L0,6"></path><path transform="translate(947,130)" d="M0,0L0,6"></path><path transform="translate(1008,130)" d="M0,0L0,6"></path><path transform="translate(1069,130)" d="M0,0L0,6"></path><path transform="translate(1130,130)" d="M0,0L0,6"></path><path transform="translate(1191,130)" d="M0,0L0,6"></path><path transform="translate(1252,130)" d="M0,0L0,6"></path><path transform="translate(1313,130)" d="M0,0L0,6"></path></g><g aria-label="x-axis tick label" transform="translate(27.5,9)"><text y="0.71em" transform="translate(93,130)">0ms</text><text y="0.71em" transform="translate(154,130)">200ms</text><text y="0.71em" transform="translate(215,130)">400ms</text><text y="0.71em" transform="translate(276,130)">600ms</text><text y="0.71em" transform="translate(337,130)">800ms</text><text y="0.71em" transform="translate(398,130)">1000ms</text><text y="0.71em" transform="translate(459,130)">1200ms</text><text y="0.71em" transform="translate(520,130)">1400ms</text><text y="0.71em" transform="translate(581,130)">1600ms</text><text y="0.71em" transform="translate(642,130)">1800ms</text><text y="0.71em" transform="translate(703,130)">2000ms</text><text y="0.71em" transform="translate(764,130)">2200ms</text><text y="0.71em" transform="translate(825,130)">2400ms</text><text y="0.71em" transform="translate(886,130)">2600ms</text><text y="0.71em" transform="translate(947,130)">2800ms</text><text y="0.71em" transform="translate(1008,130)">3000ms</text><text y="0.71em" transform="translate(1069,130)">3200ms</text><text y="0.71em" transform="translate(1130,130)">3400ms</text><text y="0.71em" transform="translate(1191,130)">3600ms</text><text y="0.71em" transform="translate(1252,130)">3800ms</text><text y="0.71em" transform="translate(1313,130)">4000ms</text></g><g aria-label="bar" fill="#76b7b2"><rect x="93" width="55" y="30" height="100" opacity="1"><title>Bucket: 0ms - 200ms
+p99: 0.064692281 ETH
+Blocks: 68655</title></rect><rect x="154" width="55" y="121.66869537340938" height="8.331304626590622" opacity="0.9368072245284393"><title>Bucket: 200ms - 400ms
+p99: 0.005389711 ETH
+Blocks: 59978</title></rect><rect x="215" width="55" y="119.63772509428134" height="10.362274905718664" opacity="0.9239822299905324"><title>Bucket: 400ms - 600ms
+p99: 0.006703592 ETH
+Blocks: 58217</title></rect><rect x="276" width="55" y="121.92110261191748" height="8.078897388082524" opacity="0.9133857694268444"><title>Bucket: 600ms - 800ms
+p99: 0.005226423 ETH
+Blocks: 56762</title></rect><rect x="337" width="55" y="102.49952587079129" height="27.500474129208712" opacity="0.9541257009686112"><title>Bucket: 800ms - 1000ms
+p99: 0.017790684 ETH
+Blocks: 62356</title></rect><rect x="398" width="55" y="102.16464047696819" height="27.835359523031812" opacity="0.9392105454810283"><title>Bucket: 1000ms - 1200ms
+p99: 0.018007329 ETH
+Blocks: 60308</title></rect><rect x="459" width="55" y="114.07939890077458" height="15.920601099225422" opacity="0.9052363265603379"><title>Bucket: 1200ms - 1400ms
+p99: 0.010299400 ETH
+Blocks: 55643</title></rect><rect x="520" width="55" y="118.92227961478125" height="11.077720385218754" opacity="0.8875391450003641"><title>Bucket: 1400ms - 1600ms
+p99: 0.007166430 ETH
+Blocks: 53213</title></rect><rect x="581" width="55" y="120.8325090593111" height="9.167490940688893" opacity="0.8612191391741315"><title>Bucket: 1600ms - 1800ms
+p99: 0.005930659 ETH
+Blocks: 49599</title></rect><rect x="642" width="55" y="121.95533389833635" height="8.044666101663651" opacity="0.7994100939480009"><title>Bucket: 1800ms - 2000ms
+p99: 0.005204278 ETH
+Blocks: 41112</title></rect><rect x="703" width="55" y="120.59725688138899" height="9.402743118611014" opacity="0.7532299177044643"><title>Bucket: 2000ms - 2200ms
+p99: 0.006082849 ETH
+Blocks: 34771</title></rect><rect x="764" width="55" y="109.3682927952409" height="20.631707204759095" opacity="0.7215060811302891"><title>Bucket: 2200ms - 2400ms
+p99: 0.013347122 ETH
+Blocks: 30415</title></rect><rect x="825" width="55" y="92.51956705623041" height="37.480432943769586" opacity="0.7082659675187531"><title>Bucket: 2400ms - 2600ms
+p99: 0.024246947 ETH
+Blocks: 28597</title></rect><rect x="886" width="55" y="77.07062346433572" height="52.929376535664275" opacity="0.6914208724783337"><title>Bucket: 2600ms - 2800ms
+p99: 0.034241221 ETH
+Blocks: 26284</title></rect><rect x="947" width="55" y="78.18282261526689" height="51.817177384733114" opacity="0.6599519335809483"><title>Bucket: 2800ms - 3000ms
+p99: 0.033521714 ETH
+Blocks: 21963</title></rect><rect x="1008" width="55" y="81.5949051170417" height="48.405094882958295" opacity="0.6259704318694924"><title>Bucket: 3000ms - 3200ms
+p99: 0.031314360 ETH
+Blocks: 17297</title></rect><rect x="1069" width="55" y="82.9014690330675" height="47.0985309669325" opacity="0.6030369237491807"><title>Bucket: 3200ms - 3400ms
+p99: 0.030469114 ETH
+Blocks: 14148</title></rect><rect x="1130" width="55" y="87.2832777375712" height="42.7167222624288" opacity="0.5827470686767169"><title>Bucket: 3400ms - 3600ms
+p99: 0.027634422 ETH
+Blocks: 11362</title></rect><rect x="1191" width="55" y="102.185347738782" height="27.814652261218" opacity="0.5657344694486928"><title>Bucket: 3600ms - 3800ms
+p99: 0.017993933 ETH
+Blocks: 9026</title></rect><rect x="1252" width="55" y="106.9750613678315" height="23.0249386321685" opacity="0.5491078581312359"><title>Bucket: 3800ms - 4000ms
+p99: 0.014895358 ETH
+Blocks: 6743</title></rect><rect x="1313" width="55" y="116.98124587692308" height="13.018754123076917" opacity="0.5007137134950113"><title>Bucket: 4000ms - 4200ms
+p99: 0.008422129 ETH
+Blocks: 98</title></rect></g><g aria-label="rule" stroke="currentColor"><line x1="80" x2="1380" y1="130" y2="130"></line></g><g aria-label="text" fill="#333" font-size="10" font-variant="tabular-nums" font-weight="bold" transform="translate(27.5,-5)"><text y="0.32em" transform="translate(93,30)">68,655</text><text y="0.32em" transform="translate(154,121.66869537340938)">59,978</text><text y="0.32em" transform="translate(215,119.63772509428134)">58,217</text><text y="0.32em" transform="translate(276,121.92110261191748)">56,762</text><text y="0.32em" transform="translate(337,102.49952587079129)">62,356</text><text y="0.32em" transform="translate(398,102.16464047696819)">60,308</text><text y="0.32em" transform="translate(459,114.07939890077458)">55,643</text><text y="0.32em" transform="translate(520,118.92227961478125)">53,213</text><text y="0.32em" transform="translate(581,120.8325090593111)">49,599</text><text y="0.32em" transform="translate(642,121.95533389833635)">41,112</text><text y="0.32em" transform="translate(703,120.59725688138899)">34,771</text><text y="0.32em" transform="translate(764,109.3682927952409)">30,415</text><text y="0.32em" transform="translate(825,92.51956705623041)">28,597</text><text y="0.32em" transform="translate(886,77.07062346433572)">26,284</text><text y="0.32em" transform="translate(947,78.18282261526689)">21,963</text><text y="0.32em" transform="translate(1008,81.5949051170417)">17,297</text><text y="0.32em" transform="translate(1069,82.9014690330675)">14,148</text><text y="0.32em" transform="translate(1130,87.2832777375712)">11,362</text><text y="0.32em" transform="translate(1191,102.185347738782)">9,026</text><text y="0.32em" transform="translate(1252,106.9750613678315)">6,743</text><text y="0.32em" transform="translate(1313,116.98124587692308)">98</text></g></svg></figure></div>
+<div class="plot-container"><figure class="plot-d6a7b5-figure" style="max-width: initial;"><h2>MAX</h2><svg class="plot-d6a7b5" fill="currentColor" font-family="system-ui, sans-serif" font-size="10" text-anchor="middle" width="1400" height="180" viewBox="0 0 1400 180"><style>:where(.plot-d6a7b5) {
+  --plot-background: white;
+  display: block;
+  height: auto;
+  height: intrinsic;
+  max-width: 100%;
+}
+:where(.plot-d6a7b5 text),
+:where(.plot-d6a7b5 tspan) {
+  white-space: pre;
+}</style><g aria-label="y-grid" aria-hidden="true" stroke="currentColor" stroke-opacity="0.1"><line x1="80" x2="1380" y1="120" y2="120"></line><line x1="80" x2="1380" y1="89.88449702062314" y2="89.88449702062314"></line><line x1="80" x2="1380" y1="59.768994041246295" y2="59.768994041246295"></line></g><g aria-label="y-axis tick" aria-hidden="true" fill="none" stroke="currentColor"><path transform="translate(80,120)" d="M0,0L-6,0"></path><path transform="translate(80,89.88449702062314)" d="M0,0L-6,0"></path><path transform="translate(80,59.768994041246295)" d="M0,0L-6,0"></path></g><g aria-label="y-axis tick label" text-anchor="end" font-variant="tabular-nums" transform="translate(-9,0)"><text y="0.32em" transform="translate(80,120)">0</text><text y="0.32em" transform="translate(80,89.88449702062314)">10</text><text y="0.32em" transform="translate(80,59.768994041246295)">20</text></g><g aria-label="y-axis label" text-anchor="start" transform="translate(-77,-27)"><text y="0.71em" transform="translate(80,30)">↑ ETH</text></g><g aria-label="x-axis tick" aria-hidden="true" fill="none" stroke="currentColor" transform="translate(27.5,0)"><path transform="translate(93,120)" d="M0,0L0,6"></path><path transform="translate(154,120)" d="M0,0L0,6"></path><path transform="translate(215,120)" d="M0,0L0,6"></path><path transform="translate(276,120)" d="M0,0L0,6"></path><path transform="translate(337,120)" d="M0,0L0,6"></path><path transform="translate(398,120)" d="M0,0L0,6"></path><path transform="translate(459,120)" d="M0,0L0,6"></path><path transform="translate(520,120)" d="M0,0L0,6"></path><path transform="translate(581,120)" d="M0,0L0,6"></path><path transform="translate(642,120)" d="M0,0L0,6"></path><path transform="translate(703,120)" d="M0,0L0,6"></path><path transform="translate(764,120)" d="M0,0L0,6"></path><path transform="translate(825,120)" d="M0,0L0,6"></path><path transform="translate(886,120)" d="M0,0L0,6"></path><path transform="translate(947,120)" d="M0,0L0,6"></path><path transform="translate(1008,120)" d="M0,0L0,6"></path><path transform="translate(1069,120)" d="M0,0L0,6"></path><path transform="translate(1130,120)" d="M0,0L0,6"></path><path transform="translate(1191,120)" d="M0,0L0,6"></path><path transform="translate(1252,120)" d="M0,0L0,6"></path><path transform="translate(1313,120)" d="M0,0L0,6"></path></g><g aria-label="x-axis tick label" transform="translate(27.5,9)"><text y="0.71em" transform="translate(93,120)">0ms</text><text y="0.71em" transform="translate(154,120)">200ms</text><text y="0.71em" transform="translate(215,120)">400ms</text><text y="0.71em" transform="translate(276,120)">600ms</text><text y="0.71em" transform="translate(337,120)">800ms</text><text y="0.71em" transform="translate(398,120)">1000ms</text><text y="0.71em" transform="translate(459,120)">1200ms</text><text y="0.71em" transform="translate(520,120)">1400ms</text><text y="0.71em" transform="translate(581,120)">1600ms</text><text y="0.71em" transform="translate(642,120)">1800ms</text><text y="0.71em" transform="translate(703,120)">2000ms</text><text y="0.71em" transform="translate(764,120)">2200ms</text><text y="0.71em" transform="translate(825,120)">2400ms</text><text y="0.71em" transform="translate(886,120)">2600ms</text><text y="0.71em" transform="translate(947,120)">2800ms</text><text y="0.71em" transform="translate(1008,120)">3000ms</text><text y="0.71em" transform="translate(1069,120)">3200ms</text><text y="0.71em" transform="translate(1130,120)">3400ms</text><text y="0.71em" transform="translate(1191,120)">3600ms</text><text y="0.71em" transform="translate(1252,120)">3800ms</text><text y="0.71em" transform="translate(1313,120)">4000ms</text></g><g aria-label="x-axis label" transform="translate(0,57)"><text transform="translate(730,120)">Time bucket (ms from slot start)</text></g><g aria-label="bar" fill="#59a14f"><rect x="93" width="55" y="109.37363229232325" height="10.62636770767675" opacity="1"><title>Bucket: 0ms - 200ms
+max: 3.528537350 ETH
+Blocks: 68655</title></rect><rect x="154" width="55" y="112.26484348573419" height="7.73515651426581" opacity="0.9368072245284393"><title>Bucket: 200ms - 400ms
+max: 2.568496538 ETH
+Blocks: 59978</title></rect><rect x="215" width="55" y="116.98913332397996" height="3.0108666760200435" opacity="0.9239822299905324"><title>Bucket: 400ms - 600ms
+max: 0.999773000 ETH
+Blocks: 58217</title></rect><rect x="276" width="55" y="116.69480207264822" height="3.3051979273517844" opacity="0.9133857694268444"><title>Bucket: 600ms - 800ms
+max: 1.097507131 ETH
+Blocks: 56762</title></rect><rect x="337" width="55" y="113.96851216125611" height="6.031487838743885" opacity="0.9541257009686112"><title>Bucket: 800ms - 1000ms
+max: 2.002785025 ETH
+Blocks: 62356</title></rect><rect x="398" width="55" y="116.64584448901701" height="3.3541555109829915" opacity="0.9392105454810283"><title>Bucket: 1000ms - 1200ms
+max: 1.113763736 ETH
+Blocks: 60308</title></rect><rect x="459" width="55" y="117.88713361805202" height="2.112866381947981" opacity="0.9052363265603379"><title>Bucket: 1200ms - 1400ms
+max: 0.701587612 ETH
+Blocks: 55643</title></rect><rect x="520" width="55" y="118.55370959783762" height="1.4462904021623757" opacity="0.8875391450003641"><title>Bucket: 1400ms - 1600ms
+max: 0.480247799 ETH
+Blocks: 53213</title></rect><rect x="581" width="55" y="117.46632398803337" height="2.5336760119666337" opacity="0.8612191391741315"><title>Bucket: 1600ms - 1800ms
+max: 0.841319507 ETH
+Blocks: 49599</title></rect><rect x="642" width="55" y="117.3866020930266" height="2.613397906973404" opacity="0.7994100939480009"><title>Bucket: 1800ms - 2000ms
+max: 0.867791552 ETH
+Blocks: 41112</title></rect><rect x="703" width="55" y="116.66288281366408" height="3.3371171863359166" opacity="0.7532299177044643"><title>Bucket: 2000ms - 2200ms
+max: 1.108106077 ETH
+Blocks: 34771</title></rect><rect x="764" width="55" y="115.93546506142688" height="4.064534938573118" opacity="0.7215060811302891"><title>Bucket: 2200ms - 2400ms
+max: 1.349648698 ETH
+Blocks: 30415</title></rect><rect x="825" width="55" y="92.46444612329697" height="27.535553876703034" opacity="0.7082659675187531"><title>Bucket: 2400ms - 2600ms
+max: 9.143315287 ETH
+Blocks: 28597</title></rect><rect x="886" width="55" y="30" height="90" opacity="0.6914208724783337"><title>Bucket: 2600ms - 2800ms
+max: 29.884940013 ETH
+Blocks: 26284</title></rect><rect x="947" width="55" y="36.832678270767" height="83.16732172923301" opacity="0.6599519335809483"><title>Bucket: 2800ms - 3000ms
+max: 27.616115788 ETH
+Blocks: 21963</title></rect><rect x="1008" width="55" y="114.56811854434423" height="5.43188145565577" opacity="0.6259704318694924"><title>Bucket: 3000ms - 3200ms
+max: 1.803682794 ETH
+Blocks: 17297</title></rect><rect x="1069" width="55" y="112.72803330789809" height="7.271966692101913" opacity="0.6030369237491807"><title>Bucket: 3200ms - 3400ms
+max: 2.414692093 ETH
+Blocks: 14148</title></rect><rect x="1130" width="55" y="80.75027380882298" height="39.24972619117702" opacity="0.5827470686767169"><title>Bucket: 3400ms - 3600ms
+max: 13.033063475 ETH
+Blocks: 11362</title></rect><rect x="1191" width="55" y="74.54801887140734" height="45.451981128592664" opacity="0.5657344694486928"><title>Bucket: 3600ms - 3800ms
+max: 15.092552550 ETH
+Blocks: 9026</title></rect><rect x="1252" width="55" y="116.54205436835252" height="3.457945631647476" opacity="0.5491078581312359"><title>Bucket: 3800ms - 4000ms
+max: 1.148227753 ETH
+Blocks: 6743</title></rect><rect x="1313" width="55" y="119.97463633490078" height="0.02536366509922061" opacity="0.5007137134950113"><title>Bucket: 4000ms - 4200ms
+max: 0.008422129 ETH
+Blocks: 98</title></rect></g><g aria-label="rule" stroke="currentColor"><line x1="80" x2="1380" y1="120" y2="120"></line></g><g aria-label="text" fill="#333" font-size="10" font-variant="tabular-nums" font-weight="bold" transform="translate(27.5,-5)"><text y="0.32em" transform="translate(93,109.37363229232325)">68,655</text><text y="0.32em" transform="translate(154,112.26484348573419)">59,978</text><text y="0.32em" transform="translate(215,116.98913332397996)">58,217</text><text y="0.32em" transform="translate(276,116.69480207264822)">56,762</text><text y="0.32em" transform="translate(337,113.96851216125611)">62,356</text><text y="0.32em" transform="translate(398,116.64584448901701)">60,308</text><text y="0.32em" transform="translate(459,117.88713361805202)">55,643</text><text y="0.32em" transform="translate(520,118.55370959783762)">53,213</text><text y="0.32em" transform="translate(581,117.46632398803337)">49,599</text><text y="0.32em" transform="translate(642,117.3866020930266)">41,112</text><text y="0.32em" transform="translate(703,116.66288281366408)">34,771</text><text y="0.32em" transform="translate(764,115.93546506142688)">30,415</text><text y="0.32em" transform="translate(825,92.46444612329697)">28,597</text><text y="0.32em" transform="translate(886,30)">26,284</text><text y="0.32em" transform="translate(947,36.832678270767)">21,963</text><text y="0.32em" transform="translate(1008,114.56811854434423)">17,297</text><text y="0.32em" transform="translate(1069,112.72803330789809)">14,148</text><text y="0.32em" transform="translate(1130,80.75027380882298)">11,362</text><text y="0.32em" transform="translate(1191,74.54801887140734)">9,026</text><text y="0.32em" transform="translate(1252,116.54205436835252)">6,743</text><text y="0.32em" transform="translate(1313,119.97463633490078)">98</text></g></svg></figure></div>
+</body>
+</html>
