@@ -160,12 +160,18 @@ const blockRangeText = startBlock !== "unknown" && endBlock !== "unknown"
   ? `Blocks ${startBlock} - ${endBlock} (${amount} blocks)`
   : `${data[0]?.num_blocks || "N/A"} blocks`;
 
+// Get min and max time buckets
+const minTime = d3.min(data, (d) => d.ms_bucket);
+const maxTime = d3.max(data, (d) => d.ms_bucket);
+
 const htmlContent = `
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <title>Bid Value Increases per ${bucketSize}ms Bucket</title>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6"></script>
   <style>
     body {
       font-family: system-ui, sans-serif;
@@ -179,6 +185,39 @@ const htmlContent = `
       margin-top: 0;
       color: #666;
       font-weight: normal;
+    }
+    .range-controls {
+      background: #f5f5f5;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+    .range-row {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 10px;
+    }
+    .range-row label {
+      min-width: 80px;
+      font-weight: 500;
+    }
+    .range-row input[type="range"] {
+      flex: 1;
+      min-width: 200px;
+    }
+    .range-row .value {
+      min-width: 80px;
+      font-family: monospace;
+      font-size: 14px;
+    }
+    .range-info {
+      margin-top: 10px;
+      padding: 8px;
+      background: white;
+      border-radius: 4px;
+      font-size: 14px;
     }
     .scroll-container {
       overflow-x: auto;
@@ -219,11 +258,198 @@ const htmlContent = `
 <body>
   <h1>Bid Value Increases per ${bucketSize}ms Bucket</h1>
   <h2>${blockRangeText}</h2>
+
+  <div class="range-controls">
+    <div class="range-row">
+      <label for="min-range">Min Time:</label>
+      <input type="range" id="min-range" min="${minTime}" max="${maxTime}" value="${minTime}" step="${bucketSize}">
+      <span class="value" id="min-value">${minTime}ms</span>
+    </div>
+    <div class="range-row">
+      <label for="max-range">Max Time:</label>
+      <input type="range" id="max-range" min="${minTime}" max="${maxTime}" value="${maxTime}" step="${bucketSize}">
+      <span class="value" id="max-value">${maxTime}ms</span>
+    </div>
+    <div class="range-info">
+      Showing <strong><span id="range-display">${minTime}ms - ${maxTime}ms</span></strong>
+      (<span id="point-count">${data.length}</span> data points)
+    </div>
+  </div>
+
   <div class="scroll-container">
-    <div class="plots-wrapper">
+    <div class="plots-wrapper" id="plots-container">
       ${plots.map((plot) => `<div class="plot-container">${plot.outerHTML}</div>`).join("\n")}
     </div>
   </div>
+
+  <script>
+    // Embedded data
+    const fullData = ${JSON.stringify(data)};
+    const bucketSize = ${bucketSize};
+    const maxBlocks = ${maxBlocks};
+
+    const metrics = [
+      { name: "mean", field: "mean_increase_eth", color: "#4e79a7" },
+      { name: "p50", field: "p50_increase_eth", color: "#f28e2c" },
+      { name: "p95", field: "p95_increase_eth", color: "#e15759" },
+      { name: "p99", field: "p99_increase_eth", color: "#76b7b2" },
+      { name: "max", field: "max_increase_eth", color: "#59a14f" },
+    ];
+
+    const minRange = document.getElementById('min-range');
+    const maxRange = document.getElementById('max-range');
+    const minValue = document.getElementById('min-value');
+    const maxValue = document.getElementById('max-value');
+    const rangeDisplay = document.getElementById('range-display');
+    const pointCount = document.getElementById('point-count');
+    const plotsContainer = document.getElementById('plots-container');
+
+    function updatePlots() {
+      const min = parseInt(minRange.value);
+      const max = parseInt(maxRange.value);
+
+      // Ensure min <= max
+      if (min > max) {
+        if (this === minRange) {
+          maxRange.value = min;
+        } else {
+          minRange.value = max;
+        }
+        return updatePlots.call(this);
+      }
+
+      // Update display values
+      minValue.textContent = min + 'ms';
+      maxValue.textContent = max + 'ms';
+      rangeDisplay.textContent = \`\${min}ms - \${max}ms\`;
+
+      // Filter data
+      const filteredData = fullData.filter(d => d.ms_bucket >= min && d.ms_bucket <= max);
+      pointCount.textContent = filteredData.length;
+
+      // Calculate dynamic width
+      const plotWidth = Math.max(1400, filteredData.length * 60);
+
+      // Generate new plots
+      const plots = metrics.slice(0, -1).map((metric) => {
+        const metricData = filteredData.map((d) => ({
+          ms_bucket: d.ms_bucket,
+          value: d[metric.field],
+          num_blocks: d.num_blocks,
+        }));
+
+        return Plot.plot({
+          title: metric.name.toUpperCase(),
+          width: plotWidth,
+          height: 180,
+          marginLeft: 80,
+          marginBottom: 50,
+          marginTop: 30,
+          x: {
+            label: null,
+            tickFormat: (d) => \`\${d}ms\`,
+          },
+          y: {
+            label: "ETH",
+            grid: true,
+          },
+          marks: [
+            Plot.barY(metricData, {
+              x: "ms_bucket",
+              y: "value",
+              fill: metric.color,
+              opacity: (d) => 0.5 + 0.5 * (d.num_blocks / maxBlocks),
+              title: (d) =>
+                \`Bucket: \${d.ms_bucket}ms - \${d.ms_bucket + bucketSize}ms\\n\${metric.name}: \${d.value.toFixed(9)} ETH\\nBlocks: \${d.num_blocks}\`,
+            }),
+            Plot.ruleY([0]),
+            Plot.text(metricData, {
+              x: "ms_bucket",
+              y: "value",
+              text: (d) => d.value.toFixed(6),
+              dy: -5,
+              fontSize: 9,
+              fill: "#333",
+              fontWeight: "bold",
+            }),
+            Plot.text(metricData, {
+              x: "ms_bucket",
+              y: 0,
+              text: (d) => d.num_blocks,
+              dy: 25,
+              fontSize: 9,
+              fill: "#999",
+            }),
+          ],
+        });
+      });
+
+      // Add last plot with x-axis label
+      const maxMetric = metrics[metrics.length - 1];
+      const maxData = filteredData.map((d) => ({
+        ms_bucket: d.ms_bucket,
+        value: d[maxMetric.field],
+        num_blocks: d.num_blocks,
+      }));
+
+      const lastPlot = Plot.plot({
+        title: "MAX",
+        width: plotWidth,
+        height: 180,
+        marginLeft: 80,
+        marginBottom: 60,
+        marginTop: 30,
+        x: {
+          label: "Time bucket (ms from slot start)",
+          tickFormat: (d) => \`\${d}ms\`,
+        },
+        y: {
+          label: "ETH",
+          grid: true,
+        },
+        marks: [
+          Plot.barY(maxData, {
+            x: "ms_bucket",
+            y: "value",
+            fill: maxMetric.color,
+            opacity: (d) => 0.5 + 0.5 * (d.num_blocks / maxBlocks),
+            title: (d) =>
+              \`Bucket: \${d.ms_bucket}ms - \${d.ms_bucket + bucketSize}ms\\nmax: \${d.value.toFixed(9)} ETH\\nBlocks: \${d.num_blocks}\`,
+          }),
+          Plot.ruleY([0]),
+          Plot.text(maxData, {
+            x: "ms_bucket",
+            y: "value",
+            text: (d) => d.value.toFixed(6),
+            dy: -5,
+            fontSize: 9,
+            fill: "#333",
+            fontWeight: "bold",
+          }),
+          Plot.text(maxData, {
+            x: "ms_bucket",
+            y: 0,
+            text: (d) => d.num_blocks,
+            dy: 35,
+            fontSize: 9,
+            fill: "#999",
+          }),
+        ],
+      });
+
+      plots.push(lastPlot);
+
+      // Update plots container
+      plotsContainer.innerHTML = plots.map(plot => \`<div class="plot-container">\${plot.outerHTML}</div>\`).join('\\n');
+
+      // Update wrapper width
+      document.querySelector('.plots-wrapper').style.minWidth = plotWidth + 'px';
+    }
+
+    // Add event listeners
+    minRange.addEventListener('input', updatePlots);
+    maxRange.addEventListener('input', updatePlots);
+  </script>
 </body>
 </html>
 `;

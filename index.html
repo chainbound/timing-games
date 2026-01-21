@@ -4,6 +4,8 @@
 <head>
   <meta charset="utf-8">
   <title>Bid Value Increases per 50ms Bucket</title>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6"></script>
   <style>
     body {
       font-family: system-ui, sans-serif;
@@ -17,6 +19,39 @@
       margin-top: 0;
       color: #666;
       font-weight: normal;
+    }
+    .range-controls {
+      background: #f5f5f5;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+    .range-row {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 10px;
+    }
+    .range-row label {
+      min-width: 80px;
+      font-weight: 500;
+    }
+    .range-row input[type="range"] {
+      flex: 1;
+      min-width: 200px;
+    }
+    .range-row .value {
+      min-width: 80px;
+      font-family: monospace;
+      font-size: 14px;
+    }
+    .range-info {
+      margin-top: 10px;
+      padding: 8px;
+      background: white;
+      border-radius: 4px;
+      font-size: 14px;
     }
     .scroll-container {
       overflow-x: auto;
@@ -57,8 +92,26 @@
 <body>
   <h1>Bid Value Increases per 50ms Bucket</h1>
   <h2>Blocks 24140508 - 24210507 (70000 blocks)</h2>
+
+  <div class="range-controls">
+    <div class="range-row">
+      <label for="min-range">Min Time:</label>
+      <input type="range" id="min-range" min="0" max="4000" value="0" step="50">
+      <span class="value" id="min-value">0ms</span>
+    </div>
+    <div class="range-row">
+      <label for="max-range">Max Time:</label>
+      <input type="range" id="max-range" min="0" max="4000" value="4000" step="50">
+      <span class="value" id="max-value">4000ms</span>
+    </div>
+    <div class="range-info">
+      Showing <strong><span id="range-display">0ms - 4000ms</span></strong>
+      (<span id="point-count">81</span> data points)
+    </div>
+  </div>
+
   <div class="scroll-container">
-    <div class="plots-wrapper">
+    <div class="plots-wrapper" id="plots-container">
       <div class="plot-container"><figure class="plot-d6a7b5-figure" style="max-width: initial;"><h2>MEAN</h2><svg class="plot-d6a7b5" fill="currentColor" font-family="system-ui, sans-serif" font-size="10" text-anchor="middle" width="4860" height="180" viewBox="0 0 4860 180"><style>:where(.plot-d6a7b5) {
   --plot-background: white;
   display: block;
@@ -926,5 +979,174 @@ max: 0.009964008 ETH
 Blocks: 207</title></rect></g><g aria-label="rule" stroke="currentColor"><line x1="80" x2="4840" y1="120" y2="120"></line></g><g aria-label="text" fill="#333" font-size="9" font-weight="bold" transform="translate(26.411837237977803,-5)"><text y="0.32em" transform="translate(85.86929716399527,100.3941520561204)">3.527829</text><text y="0.32em" transform="translate(144.56226880394593,116.87777881597941)">0.561805</text><text y="0.32em" transform="translate(203.2552404438966,107.2204912664199)">2.299514</text><text y="0.32em" transform="translate(261.9482120838473,118.50365352576819)">0.269249</text><text y="0.32em" transform="translate(320.64118372379795,105.72562803440069)">2.568496</text><text y="0.32em" transform="translate(379.3341553637486,109.59978102857237)">1.871390</text><text y="0.32em" transform="translate(438.0271270036993,118.59353761149328)">0.253075</text><text y="0.32em" transform="translate(496.72009864365,118.47744698096274)">0.273964</text><text y="0.32em" transform="translate(555.4130702836006,118.28069697523654)">0.309367</text><text y="0.32em" transform="translate(614.1060419235513,110.91829588634523)">1.634140</text><text y="0.32em" transform="translate(672.799013563502,116.87111080886142)">0.563005</text><text y="0.32em" transform="translate(731.4919852034526,114.50823446717463)">0.988175</text><text y="0.32em" transform="translate(790.1849568434034,112.4834904781478)">1.352502</text><text y="0.32em" transform="translate(848.877928483354,109.9979656147819)">1.799742</text><text y="0.32em" transform="translate(907.5709001233047,105.72753616842351)">2.568152</text><text y="0.32em" transform="translate(966.2638717632553,100.40672174901663)">3.525567</text><text y="0.32em" transform="translate(1024.956843403206,105.72753616842351)">2.568152</text><text y="0.32em" transform="translate(1083.6498150431567,109.24077420265846)">1.935989</text><text y="0.32em" transform="translate(1142.3427866831073,116.02328094937667)">0.715561</text><text y="0.32em" transform="translate(1201.035758323058,115.83339994270098)">0.749728</text><text y="0.32em" transform="translate(1259.7287299630086,115.4221434560806)">0.823728</text><text y="0.32em" transform="translate(1318.4217016029593,116.89370864094126)">0.558939</text><text y="0.32em" transform="translate(1377.11467324291,113.15892976941053)">1.230966</text><text y="0.32em" transform="translate(1435.8076448828606,115.00485933444334)">0.898813</text><text y="0.32em" transform="translate(1494.5006165228115,110.54221921229599)">1.701810</text><text y="0.32em" transform="translate(1553.1935881627621,114.39890744358577)">1.007847</text><text y="0.32em" transform="translate(1611.8865598027128,116.66055358102514)">0.600892</text><text y="0.32em" transform="translate(1670.5795314426634,108.808896297218)">2.013700</text><text y="0.32em" transform="translate(1729.272503082614,116.3273013542789)">0.660856</text><text y="0.32em" transform="translate(1787.9654747225647,118.6421457369791)">0.244329</text><text y="0.32em" transform="translate(1846.6584463625154,108.85180567953469)">2.005979</text><text y="0.32em" transform="translate(1905.351418002466,110.14002257346992)">1.774180</text><text y="0.32em" transform="translate(1964.0443896424167,110.55509728436996)">1.699493</text><text y="0.32em" transform="translate(2022.7373612823674,116.66055438686021)">0.600892</text><text y="0.32em" transform="translate(2081.430332922318,111.22752176333478)">1.578498</text><text y="0.32em" transform="translate(2140.123304562269,97.99787480773162)">3.959009</text><text y="0.32em" transform="translate(2198.8162762022193,107.90835353302596)">2.175741</text><text y="0.32em" transform="translate(2257.50924784217,110.93052396075747)">1.631939</text><text y="0.32em" transform="translate(2316.2022194821207,117.87863566668058)">0.381713</text><text y="0.32em" transform="translate(2374.8951911220715,110.93031987330689)">1.631976</text><text y="0.32em" transform="translate(2433.588162762022,114.72039108861955)">0.950000</text><text y="0.32em" transform="translate(2492.281134401973,117.90826144182658)">0.376382</text><text y="0.32em" transform="translate(2550.9741060419233,110.85298601261485)">1.645891</text><text y="0.32em" transform="translate(2609.667077681874,101.0980098760405)">3.401178</text><text y="0.32em" transform="translate(2668.3600493218246,112.83859897977864)">1.288605</text><text y="0.32em" transform="translate(2727.0530209617755,116.05403035867859)">0.710028</text><text y="0.32em" transform="translate(2785.745992601726,117.19472209182663)">0.504775</text><text y="0.32em" transform="translate(2844.438964241677,113.78841492789739)">1.117698</text><text y="0.32em" transform="translate(2903.1319358816277,106.47199878246809)">2.434196</text><text y="0.32em" transform="translate(2961.824907521578,82.08244210424263)">6.822793</text><text y="0.32em" transform="translate(3020.517879161529,108.83396386365679)">2.009189</text><text y="0.32em" transform="translate(3079.2108508014794,80.4796972054851)">7.111187</text><text y="0.32em" transform="translate(3137.9038224414303,107.17828290501699)">2.307109</text><text y="0.32em" transform="translate(3196.5967940813807,111.7329500616867)">1.487553</text><text y="0.32em" transform="translate(3255.2897657213316,49.52679151908174)">12.680778</text><text y="0.32em" transform="translate(3313.982737361282,30)">16.194381</text><text y="0.32em" transform="translate(3372.675709001233,38.49803569584746)">14.665265</text><text y="0.32em" transform="translate(3431.3686806411833,52.122812961674995)">12.213656</text><text y="0.32em" transform="translate(3490.0616522811342,114.70521928767526)">0.952730</text><text y="0.32em" transform="translate(3548.7546239210847,104.47679547796405)">2.793208</text><text y="0.32em" transform="translate(3607.4475955610355,111.73279196796594)">1.487581</text><text y="0.32em" transform="translate(3666.140567200986,113.20994395717186)">1.221786</text><text y="0.32em" transform="translate(3724.833538840937,112.97434851752233)">1.264179</text><text y="0.32em" transform="translate(3783.5265104808873,111.7324430858516)">1.487644</text><text y="0.32em" transform="translate(3842.219482120838,118.58999471603957)">0.253713</text><text y="0.32em" transform="translate(3900.912453760789,117.73234671798376)">0.408036</text><text y="0.32em" transform="translate(3959.6054254007395,118.69987543722365)">0.233941</text><text y="0.32em" transform="translate(4018.2983970406904,107.45747257006374)">2.256872</text><text y="0.32em" transform="translate(4076.991368680641,112.83975515299791)">1.288397</text><text y="0.32em" transform="translate(4135.684340320591,113.9626816134823)">1.086340</text><text y="0.32em" transform="translate(4194.377311960543,53.61100446862004)">11.945875</text><text y="0.32em" transform="translate(4253.070283600493,113.27144397619206)">1.210720</text><text y="0.32em" transform="translate(4311.763255240443,116.93349388415318)">0.551780</text><text y="0.32em" transform="translate(4370.456226880395,53.121183316648285)">12.034012</text><text y="0.32em" transform="translate(4429.149198520345,103.00221142940033)">3.058541</text><text y="0.32em" transform="translate(4487.842170160295,92.27940656397782)">4.987976</text><text y="0.32em" transform="translate(4546.5351418002465,117.56143096683)">0.438790</text><text y="0.32em" transform="translate(4605.2281134401965,116.30457090953819)">0.664947</text><text y="0.32em" transform="translate(4663.921085080148,113.61874495881985)">1.148228</text><text y="0.32em" transform="translate(4722.614056720098,116.30457040936471)">0.664947</text><text y="0.32em" transform="translate(4781.307028360048,119.94462519428436)">0.009964</text></g><g aria-label="text" fill="#999" font-size="9" font-variant="tabular-nums" transform="translate(26.411837237977803,35)"><text y="0.32em" transform="translate(85.86929716399527,120)">68,371</text><text y="0.32em" transform="translate(144.56226880394593,120)">47,696</text><text y="0.32em" transform="translate(203.2552404438966,120)">48,745</text><text y="0.32em" transform="translate(261.9482120838473,120)">48,785</text><text y="0.32em" transform="translate(320.64118372379795,120)">47,033</text><text y="0.32em" transform="translate(379.3341553637486,120)">47,628</text><text y="0.32em" transform="translate(438.0271270036993,120)">47,611</text><text y="0.32em" transform="translate(496.72009864365,120)">45,198</text><text y="0.32em" transform="translate(555.4130702836006,120)">44,986</text><text y="0.32em" transform="translate(614.1060419235513,120)">45,982</text><text y="0.32em" transform="translate(672.799013563502,120)">45,335</text><text y="0.32em" transform="translate(731.4919852034526,120)">44,859</text><text y="0.32em" transform="translate(790.1849568434034,120)">44,472</text><text y="0.32em" transform="translate(848.877928483354,120)">43,204</text><text y="0.32em" transform="translate(907.5709001233047,120)">42,632</text><text y="0.32em" transform="translate(966.2638717632553,120)">44,110</text><text y="0.32em" transform="translate(1024.956843403206,120)">42,995</text><text y="0.32em" transform="translate(1083.6498150431567,120)">52,672</text><text y="0.32em" transform="translate(1142.3427866831073,120)">56,222</text><text y="0.32em" transform="translate(1201.035758323058,120)">52,378</text><text y="0.32em" transform="translate(1259.7287299630086,120)">49,766</text><text y="0.32em" transform="translate(1318.4217016029593,120)">49,952</text><text y="0.32em" transform="translate(1377.11467324291,120)">48,219</text><text y="0.32em" transform="translate(1435.8076448828606,120)">46,884</text><text y="0.32em" transform="translate(1494.5006165228115,120)">46,847</text><text y="0.32em" transform="translate(1553.1935881627621,120)">45,504</text><text y="0.32em" transform="translate(1611.8865598027128,120)">45,431</text><text y="0.32em" transform="translate(1670.5795314426634,120)">45,989</text><text y="0.32em" transform="translate(1729.272503082614,120)">44,589</text><text y="0.32em" transform="translate(1787.9654747225647,120)">44,567</text><text y="0.32em" transform="translate(1846.6584463625154,120)">44,940</text><text y="0.32em" transform="translate(1905.351418002466,120)">43,420</text><text y="0.32em" transform="translate(1964.0443896424167,120)">42,943</text><text y="0.32em" transform="translate(2022.7373612823674,120)">42,200</text><text y="0.32em" transform="translate(2081.430332922318,120)">40,464</text><text y="0.32em" transform="translate(2140.123304562269,120)">38,812</text><text y="0.32em" transform="translate(2198.8162762022193,120)">38,053</text><text y="0.32em" transform="translate(2257.50924784217,120)">36,196</text><text y="0.32em" transform="translate(2316.2022194821207,120)">34,758</text><text y="0.32em" transform="translate(2374.8951911220715,120)">33,591</text><text y="0.32em" transform="translate(2433.588162762022,120)">32,090</text><text y="0.32em" transform="translate(2492.281134401973,120)">30,573</text><text y="0.32em" transform="translate(2550.9741060419233,120)">29,390</text><text y="0.32em" transform="translate(2609.667077681874,120)">28,397</text><text y="0.32em" transform="translate(2668.3600493218246,120)">27,361</text><text y="0.32em" transform="translate(2727.0530209617755,120)">27,168</text><text y="0.32em" transform="translate(2785.745992601726,120)">26,054</text><text y="0.32em" transform="translate(2844.438964241677,120)">25,273</text><text y="0.32em" transform="translate(2903.1319358816277,120)">25,324</text><text y="0.32em" transform="translate(2961.824907521578,120)">24,158</text><text y="0.32em" transform="translate(3020.517879161529,120)">24,080</text><text y="0.32em" transform="translate(3079.2108508014794,120)">24,081</text><text y="0.32em" transform="translate(3137.9038224414303,120)">22,985</text><text y="0.32em" transform="translate(3196.5967940813807,120)">22,625</text><text y="0.32em" transform="translate(3255.2897657213316,120)">22,079</text><text y="0.32em" transform="translate(3313.982737361282,120)">20,648</text><text y="0.32em" transform="translate(3372.675709001233,120)">19,897</text><text y="0.32em" transform="translate(3431.3686806411833,120)">19,168</text><text y="0.32em" transform="translate(3490.0616522811342,120)">18,099</text><text y="0.32em" transform="translate(3548.7546239210847,120)">17,050</text><text y="0.32em" transform="translate(3607.4475955610355,120)">16,100</text><text y="0.32em" transform="translate(3666.140567200986,120)">15,257</text><text y="0.32em" transform="translate(3724.833538840937,120)">14,405</text><text y="0.32em" transform="translate(3783.5265104808873,120)">13,678</text><text y="0.32em" transform="translate(3842.219482120838,120)">13,042</text><text y="0.32em" transform="translate(3900.912453760789,120)">12,347</text><text y="0.32em" transform="translate(3959.6054254007395,120)">11,775</text><text y="0.32em" transform="translate(4018.2983970406904,120)">11,119</text><text y="0.32em" transform="translate(4076.991368680641,120)">10,434</text><text y="0.32em" transform="translate(4135.684340320591,120)">9,898</text><text y="0.32em" transform="translate(4194.377311960543,120)">9,286</text><text y="0.32em" transform="translate(4253.070283600493,120)">8,749</text><text y="0.32em" transform="translate(4311.763255240443,120)">8,390</text><text y="0.32em" transform="translate(4370.456226880395,120)">7,882</text><text y="0.32em" transform="translate(4429.149198520345,120)">7,467</text><text y="0.32em" transform="translate(4487.842170160295,120)">6,850</text><text y="0.32em" transform="translate(4546.5351418002465,120)">6,525</text><text y="0.32em" transform="translate(4605.2281134401965,120)">6,116</text><text y="0.32em" transform="translate(4663.921085080148,120)">5,673</text><text y="0.32em" transform="translate(4722.614056720098,120)">5,169</text><text y="0.32em" transform="translate(4781.307028360048,120)">207</text></g></svg></figure></div>
     </div>
   </div>
+
+  <script>
+    // Embedded data
+    const fullData = [{"ms_bucket":0,"mean_increase_eth":0.010612697,"p50_increase_eth":0.007468236,"p95_increase_eth":0.021276831,"p99_increase_eth":0.060363577,"max_increase_eth":3.527828644,"num_blocks":68371},{"ms_bucket":50,"mean_increase_eth":0.000345863,"p50_increase_eth":0.000011429,"p95_increase_eth":0.001122295,"p99_increase_eth":0.004727024,"max_increase_eth":0.561804894,"num_blocks":47696},{"ms_bucket":100,"mean_increase_eth":0.000428817,"p50_increase_eth":0.000012879,"p95_increase_eth":0.00106025,"p99_increase_eth":0.004392762,"max_increase_eth":2.299513752,"num_blocks":48745},{"ms_bucket":150,"mean_increase_eth":0.000295616,"p50_increase_eth":0.000011788,"p95_increase_eth":0.001000102,"p99_increase_eth":0.004146765,"max_increase_eth":0.269248949,"num_blocks":48785},{"ms_bucket":200,"mean_increase_eth":0.000373579,"p50_increase_eth":0.000010171,"p95_increase_eth":0.000987296,"p99_increase_eth":0.00407,"max_increase_eth":2.56849581,"num_blocks":47033},{"ms_bucket":250,"mean_increase_eth":0.000373481,"p50_increase_eth":0.000011627,"p95_increase_eth":0.001008245,"p99_increase_eth":0.004373635,"max_increase_eth":1.871390133,"num_blocks":47628},{"ms_bucket":300,"mean_increase_eth":0.000304283,"p50_increase_eth":0.000011538,"p95_increase_eth":0.001020183,"p99_increase_eth":0.004354376,"max_increase_eth":0.253075425,"num_blocks":47611},{"ms_bucket":350,"mean_increase_eth":0.000298388,"p50_increase_eth":0.000008797,"p95_increase_eth":0.000987808,"p99_increase_eth":0.004412851,"max_increase_eth":0.273964491,"num_blocks":45198},{"ms_bucket":400,"mean_increase_eth":0.000301335,"p50_increase_eth":0.00000889,"p95_increase_eth":0.000991604,"p99_increase_eth":0.004691184,"max_increase_eth":0.309367209,"num_blocks":44986},{"ms_bucket":450,"mean_increase_eth":0.000355118,"p50_increase_eth":0.000009529,"p95_increase_eth":0.001035984,"p99_increase_eth":0.004539243,"max_increase_eth":1.634139773,"num_blocks":45982},{"ms_bucket":500,"mean_increase_eth":0.000384956,"p50_increase_eth":0.000011643,"p95_increase_eth":0.001464723,"p99_increase_eth":0.005568473,"max_increase_eth":0.563004719,"num_blocks":45335},{"ms_bucket":550,"mean_increase_eth":0.000413649,"p50_increase_eth":0.00001061,"p95_increase_eth":0.001248719,"p99_increase_eth":0.005528404,"max_increase_eth":0.988174947,"num_blocks":44859},{"ms_bucket":600,"mean_increase_eth":0.000370619,"p50_increase_eth":0.000010644,"p95_increase_eth":0.001079242,"p99_increase_eth":0.004754127,"max_increase_eth":1.352502461,"num_blocks":44472},{"ms_bucket":650,"mean_increase_eth":0.000422358,"p50_increase_eth":0.000009843,"p95_increase_eth":0.001128583,"p99_increase_eth":0.004790573,"max_increase_eth":1.799741766,"num_blocks":43204},{"ms_bucket":700,"mean_increase_eth":0.000399277,"p50_increase_eth":0.000010863,"p95_increase_eth":0.001149985,"p99_increase_eth":0.004660742,"max_increase_eth":2.568152465,"num_blocks":42632},{"ms_bucket":750,"mean_increase_eth":0.000420883,"p50_increase_eth":0.000011167,"p95_increase_eth":0.001205255,"p99_increase_eth":0.004827522,"max_increase_eth":3.525566884,"num_blocks":44110},{"ms_bucket":800,"mean_increase_eth":0.000402405,"p50_increase_eth":0.000010128,"p95_increase_eth":0.001129278,"p99_increase_eth":0.00473063,"max_increase_eth":2.568152465,"num_blocks":42995},{"ms_bucket":850,"mean_increase_eth":0.000657967,"p50_increase_eth":0.000020646,"p95_increase_eth":0.001903116,"p99_increase_eth":0.007672913,"max_increase_eth":1.935988949,"num_blocks":52672},{"ms_bucket":900,"mean_increase_eth":0.001008241,"p50_increase_eth":0.000303762,"p95_increase_eth":0.002846433,"p99_increase_eth":0.0090101,"max_increase_eth":0.715561164,"num_blocks":56222},{"ms_bucket":950,"mean_increase_eth":0.000676864,"p50_increase_eth":0.000052102,"p95_increase_eth":0.00236781,"p99_increase_eth":0.00797562,"max_increase_eth":0.749727891,"num_blocks":52378},{"ms_bucket":1000,"mean_increase_eth":0.000590314,"p50_increase_eth":0.000021442,"p95_increase_eth":0.002214753,"p99_increase_eth":0.007676599,"max_increase_eth":0.823728384,"num_blocks":49766},{"ms_bucket":1050,"mean_increase_eth":0.000558629,"p50_increase_eth":0.000020387,"p95_increase_eth":0.002240519,"p99_increase_eth":0.007548881,"max_increase_eth":0.55893852,"num_blocks":49952},{"ms_bucket":1100,"mean_increase_eth":0.000499056,"p50_increase_eth":0.000011953,"p95_increase_eth":0.001813855,"p99_increase_eth":0.006818932,"max_increase_eth":1.230965556,"num_blocks":48219},{"ms_bucket":1150,"mean_increase_eth":0.00042987,"p50_increase_eth":0.00001,"p95_increase_eth":0.001610509,"p99_increase_eth":0.00613544,"max_increase_eth":0.898813475,"num_blocks":46884},{"ms_bucket":1200,"mean_increase_eth":0.000413289,"p50_increase_eth":0.0000105,"p95_increase_eth":0.001428532,"p99_increase_eth":0.005254173,"max_increase_eth":1.701810096,"num_blocks":46847},{"ms_bucket":1250,"mean_increase_eth":0.000366251,"p50_increase_eth":0.000008883,"p95_increase_eth":0.001300638,"p99_increase_eth":0.004973902,"max_increase_eth":1.007846986,"num_blocks":45504},{"ms_bucket":1300,"mean_increase_eth":0.000364645,"p50_increase_eth":0.000009032,"p95_increase_eth":0.001313611,"p99_increase_eth":0.005019339,"max_increase_eth":0.600891875,"num_blocks":45431},{"ms_bucket":1350,"mean_increase_eth":0.000458288,"p50_increase_eth":0.000009753,"p95_increase_eth":0.001270286,"p99_increase_eth":0.005056822,"max_increase_eth":2.01370001,"num_blocks":45989},{"ms_bucket":1400,"mean_increase_eth":0.000352382,"p50_increase_eth":0.000009444,"p95_increase_eth":0.001235768,"p99_increase_eth":0.004608436,"max_increase_eth":0.660856471,"num_blocks":44589},{"ms_bucket":1450,"mean_increase_eth":0.000353795,"p50_increase_eth":0.000010411,"p95_increase_eth":0.001368034,"p99_increase_eth":0.005362806,"max_increase_eth":0.244328997,"num_blocks":44567},{"ms_bucket":1500,"mean_increase_eth":0.000463636,"p50_increase_eth":0.000013136,"p95_increase_eth":0.001344532,"p99_increase_eth":0.005096974,"max_increase_eth":2.005979,"num_blocks":44940},{"ms_bucket":1550,"mean_increase_eth":0.00041176,"p50_increase_eth":0.000012016,"p95_increase_eth":0.001179351,"p99_increase_eth":0.004764897,"max_increase_eth":1.774180382,"num_blocks":43420},{"ms_bucket":1600,"mean_increase_eth":0.000546461,"p50_increase_eth":0.000012721,"p95_increase_eth":0.001342943,"p99_increase_eth":0.005585869,"max_increase_eth":1.699492847,"num_blocks":42943},{"ms_bucket":1650,"mean_increase_eth":0.00040751,"p50_increase_eth":0.000013847,"p95_increase_eth":0.001396136,"p99_increase_eth":0.005403939,"max_increase_eth":0.60089173,"num_blocks":42200},{"ms_bucket":1700,"mean_increase_eth":0.00052129,"p50_increase_eth":0.00001161,"p95_increase_eth":0.001515515,"p99_increase_eth":0.005697448,"max_increase_eth":1.57849842,"num_blocks":40464},{"ms_bucket":1750,"mean_increase_eth":0.000655917,"p50_increase_eth":0.00001043,"p95_increase_eth":0.001639337,"p99_increase_eth":0.00639601,"max_increase_eth":3.95900895,"num_blocks":38812},{"ms_bucket":1800,"mean_increase_eth":0.000586533,"p50_increase_eth":0.0000113,"p95_increase_eth":0.001802956,"p99_increase_eth":0.007138003,"max_increase_eth":2.175741487,"num_blocks":38053},{"ms_bucket":1850,"mean_increase_eth":0.000557954,"p50_increase_eth":0.000009014,"p95_increase_eth":0.001874833,"p99_increase_eth":0.007459293,"max_increase_eth":1.631939483,"num_blocks":36196},{"ms_bucket":1900,"mean_increase_eth":0.000558148,"p50_increase_eth":0.00000825,"p95_increase_eth":0.002243354,"p99_increase_eth":0.00847928,"max_increase_eth":0.381713144,"num_blocks":34758},{"ms_bucket":1950,"mean_increase_eth":0.000624519,"p50_increase_eth":0.000007119,"p95_increase_eth":0.002192731,"p99_increase_eth":0.008400358,"max_increase_eth":1.631976206,"num_blocks":33591},{"ms_bucket":2000,"mean_increase_eth":0.000523571,"p50_increase_eth":0.00000541,"p95_increase_eth":0.00190961,"p99_increase_eth":0.007578419,"max_increase_eth":0.95,"num_blocks":32090},{"ms_bucket":2050,"mean_increase_eth":0.000535933,"p50_increase_eth":0.000004337,"p95_increase_eth":0.00198987,"p99_increase_eth":0.00809591,"max_increase_eth":0.376382354,"num_blocks":30573},{"ms_bucket":2100,"mean_increase_eth":0.000554997,"p50_increase_eth":0.000004094,"p95_increase_eth":0.001952806,"p99_increase_eth":0.007729263,"max_increase_eth":1.645891473,"num_blocks":29390},{"ms_bucket":2150,"mean_increase_eth":0.000687249,"p50_increase_eth":0.000003405,"p95_increase_eth":0.001930901,"p99_increase_eth":0.007519716,"max_increase_eth":3.401178178,"num_blocks":28397},{"ms_bucket":2200,"mean_increase_eth":0.000608196,"p50_increase_eth":0.000003081,"p95_increase_eth":0.002088195,"p99_increase_eth":0.007963545,"max_increase_eth":1.2886051,"num_blocks":27361},{"ms_bucket":2250,"mean_increase_eth":0.000525759,"p50_increase_eth":0.000003518,"p95_increase_eth":0.002179091,"p99_increase_eth":0.007776762,"max_increase_eth":0.71002819,"num_blocks":27168},{"ms_bucket":2300,"mean_increase_eth":0.000624447,"p50_increase_eth":0.000002903,"p95_increase_eth":0.002595533,"p99_increase_eth":0.009021934,"max_increase_eth":0.504774891,"num_blocks":26054},{"ms_bucket":2350,"mean_increase_eth":0.000798034,"p50_increase_eth":0.000003027,"p95_increase_eth":0.003229047,"p99_increase_eth":0.009431611,"max_increase_eth":1.117697526,"num_blocks":25273},{"ms_bucket":2400,"mean_increase_eth":0.000758699,"p50_increase_eth":0.000003459,"p95_increase_eth":0.003318849,"p99_increase_eth":0.010055753,"max_increase_eth":2.434195671,"num_blocks":25324},{"ms_bucket":2450,"mean_increase_eth":0.001305907,"p50_increase_eth":0.000003969,"p95_increase_eth":0.00377244,"p99_increase_eth":0.010719377,"max_increase_eth":6.822793242,"num_blocks":24158},{"ms_bucket":2500,"mean_increase_eth":0.001175297,"p50_increase_eth":0.000004403,"p95_increase_eth":0.00432177,"p99_increase_eth":0.012043988,"max_increase_eth":2.009189413,"num_blocks":24080},{"ms_bucket":2550,"mean_increase_eth":0.001427821,"p50_increase_eth":0.000006944,"p95_increase_eth":0.004700879,"p99_increase_eth":0.013272944,"max_increase_eth":7.111187265,"num_blocks":24081},{"ms_bucket":2600,"mean_increase_eth":0.001223159,"p50_increase_eth":0.000006099,"p95_increase_eth":0.004844333,"p99_increase_eth":0.013468328,"max_increase_eth":2.307108622,"num_blocks":22985},{"ms_bucket":2650,"mean_increase_eth":0.001277604,"p50_increase_eth":0.000008493,"p95_increase_eth":0.005426472,"p99_increase_eth":0.014296757,"max_increase_eth":1.48755288,"num_blocks":22625},{"ms_bucket":2700,"mean_increase_eth":0.002306168,"p50_increase_eth":0.000008767,"p95_increase_eth":0.005384691,"p99_increase_eth":0.01419298,"max_increase_eth":12.68077791,"num_blocks":22079},{"ms_bucket":2750,"mean_increase_eth":0.002202292,"p50_increase_eth":0.0000082,"p95_increase_eth":0.005437412,"p99_increase_eth":0.014718418,"max_increase_eth":16.194381333,"num_blocks":20648},{"ms_bucket":2800,"mean_increase_eth":0.00199284,"p50_increase_eth":0.000008981,"p95_increase_eth":0.005754048,"p99_increase_eth":0.016224698,"max_increase_eth":14.665265437,"num_blocks":19897},{"ms_bucket":2850,"mean_increase_eth":0.002072959,"p50_increase_eth":0.00000883,"p95_increase_eth":0.005591155,"p99_increase_eth":0.015854273,"max_increase_eth":12.213656119,"num_blocks":19168},{"ms_bucket":2900,"mean_increase_eth":0.001197706,"p50_increase_eth":0.000007168,"p95_increase_eth":0.005425746,"p99_increase_eth":0.015299953,"max_increase_eth":0.952729977,"num_blocks":18099},{"ms_bucket":2950,"mean_increase_eth":0.00135706,"p50_increase_eth":0.000004897,"p95_increase_eth":0.005300048,"p99_increase_eth":0.01605213,"max_increase_eth":2.793207706,"num_blocks":17050},{"ms_bucket":3000,"mean_increase_eth":0.001237123,"p50_increase_eth":0.000004886,"p95_increase_eth":0.00514947,"p99_increase_eth":0.016135661,"max_increase_eth":1.487581327,"num_blocks":16100},{"ms_bucket":3050,"mean_increase_eth":0.001212681,"p50_increase_eth":0.00000294,"p95_increase_eth":0.00491333,"p99_increase_eth":0.015254367,"max_increase_eth":1.221786187,"num_blocks":15257},{"ms_bucket":3100,"mean_increase_eth":0.001237747,"p50_increase_eth":0.00000193,"p95_increase_eth":0.004741231,"p99_increase_eth":0.014677662,"max_increase_eth":1.264178658,"num_blocks":14405},{"ms_bucket":3150,"mean_increase_eth":0.001455946,"p50_increase_eth":0.000001717,"p95_increase_eth":0.004649075,"p99_increase_eth":0.015125636,"max_increase_eth":1.487644104,"num_blocks":13678},{"ms_bucket":3200,"mean_increase_eth":0.000999538,"p50_increase_eth":0.000001005,"p95_increase_eth":0.00462873,"p99_increase_eth":0.014858406,"max_increase_eth":0.253712925,"num_blocks":13042},{"ms_bucket":3250,"mean_increase_eth":0.001076461,"p50_increase_eth":5.73e-7,"p95_increase_eth":0.0048261,"p99_increase_eth":0.015398259,"max_increase_eth":0.408036022,"num_blocks":12347},{"ms_bucket":3300,"mean_increase_eth":0.001035885,"p50_increase_eth":5.46e-7,"p95_increase_eth":0.005080863,"p99_increase_eth":0.015170664,"max_increase_eth":0.233941255,"num_blocks":11775},{"ms_bucket":3350,"mean_increase_eth":0.001242229,"p50_increase_eth":2.8e-7,"p95_increase_eth":0.004924156,"p99_increase_eth":0.016452755,"max_increase_eth":2.256871912,"num_blocks":11119},{"ms_bucket":3400,"mean_increase_eth":0.001241779,"p50_increase_eth":1.02e-7,"p95_increase_eth":0.004914893,"p99_increase_eth":0.015015636,"max_increase_eth":1.288397061,"num_blocks":10434},{"ms_bucket":3450,"mean_increase_eth":0.001224408,"p50_increase_eth":4e-8,"p95_increase_eth":0.004464198,"p99_increase_eth":0.017634741,"max_increase_eth":1.086340402,"num_blocks":9898},{"ms_bucket":3500,"mean_increase_eth":0.002896078,"p50_increase_eth":2e-8,"p95_increase_eth":0.004111216,"p99_increase_eth":0.01536851,"max_increase_eth":11.945874555,"num_blocks":9286},{"ms_bucket":3550,"mean_increase_eth":0.001163851,"p50_increase_eth":0,"p95_increase_eth":0.00361484,"p99_increase_eth":0.015279024,"max_increase_eth":1.210720023,"num_blocks":8749},{"ms_bucket":3600,"mean_increase_eth":0.000936301,"p50_increase_eth":0,"p95_increase_eth":0.00343355,"p99_increase_eth":0.016109751,"max_increase_eth":0.55177966,"num_blocks":8390},{"ms_bucket":3650,"mean_increase_eth":0.002648444,"p50_increase_eth":0,"p95_increase_eth":0.003145516,"p99_increase_eth":0.015275972,"max_increase_eth":12.034011783,"num_blocks":7882},{"ms_bucket":3700,"mean_increase_eth":0.001130006,"p50_increase_eth":0,"p95_increase_eth":0.002799237,"p99_increase_eth":0.013821195,"max_increase_eth":3.058540777,"num_blocks":7467},{"ms_bucket":3750,"mean_increase_eth":0.001738577,"p50_increase_eth":0,"p95_increase_eth":0.002691407,"p99_increase_eth":0.017730977,"max_increase_eth":4.987976232,"num_blocks":6850},{"ms_bucket":3800,"mean_increase_eth":0.000912122,"p50_increase_eth":0,"p95_increase_eth":0.002653166,"p99_increase_eth":0.016835352,"max_increase_eth":0.438790187,"num_blocks":6525},{"ms_bucket":3850,"mean_increase_eth":0.000867063,"p50_increase_eth":0,"p95_increase_eth":0.00249712,"p99_increase_eth":0.016945851,"max_increase_eth":0.664946532,"num_blocks":6116},{"ms_bucket":3900,"mean_increase_eth":0.001082528,"p50_increase_eth":0,"p95_increase_eth":0.002659112,"p99_increase_eth":0.016750386,"max_increase_eth":1.148227528,"num_blocks":5673},{"ms_bucket":3950,"mean_increase_eth":0.001034133,"p50_increase_eth":0,"p95_increase_eth":0.002239901,"p99_increase_eth":0.017586141,"max_increase_eth":0.664946622,"num_blocks":5169},{"ms_bucket":4000,"mean_increase_eth":0.00025043,"p50_increase_eth":0,"p95_increase_eth":0.000844004,"p99_increase_eth":0.008422129,"max_increase_eth":0.009964008,"num_blocks":207}];
+    const bucketSize = 50;
+    const maxBlocks = 68371;
+
+    const metrics = [
+      { name: "mean", field: "mean_increase_eth", color: "#4e79a7" },
+      { name: "p50", field: "p50_increase_eth", color: "#f28e2c" },
+      { name: "p95", field: "p95_increase_eth", color: "#e15759" },
+      { name: "p99", field: "p99_increase_eth", color: "#76b7b2" },
+      { name: "max", field: "max_increase_eth", color: "#59a14f" },
+    ];
+
+    const minRange = document.getElementById('min-range');
+    const maxRange = document.getElementById('max-range');
+    const minValue = document.getElementById('min-value');
+    const maxValue = document.getElementById('max-value');
+    const rangeDisplay = document.getElementById('range-display');
+    const pointCount = document.getElementById('point-count');
+    const plotsContainer = document.getElementById('plots-container');
+
+    function updatePlots() {
+      const min = parseInt(minRange.value);
+      const max = parseInt(maxRange.value);
+
+      // Ensure min <= max
+      if (min > max) {
+        if (this === minRange) {
+          maxRange.value = min;
+        } else {
+          minRange.value = max;
+        }
+        return updatePlots.call(this);
+      }
+
+      // Update display values
+      minValue.textContent = min + 'ms';
+      maxValue.textContent = max + 'ms';
+      rangeDisplay.textContent = `${min}ms - ${max}ms`;
+
+      // Filter data
+      const filteredData = fullData.filter(d => d.ms_bucket >= min && d.ms_bucket <= max);
+      pointCount.textContent = filteredData.length;
+
+      // Calculate dynamic width
+      const plotWidth = Math.max(1400, filteredData.length * 60);
+
+      // Generate new plots
+      const plots = metrics.slice(0, -1).map((metric) => {
+        const metricData = filteredData.map((d) => ({
+          ms_bucket: d.ms_bucket,
+          value: d[metric.field],
+          num_blocks: d.num_blocks,
+        }));
+
+        return Plot.plot({
+          title: metric.name.toUpperCase(),
+          width: plotWidth,
+          height: 180,
+          marginLeft: 80,
+          marginBottom: 50,
+          marginTop: 30,
+          x: {
+            label: null,
+            tickFormat: (d) => `${d}ms`,
+          },
+          y: {
+            label: "ETH",
+            grid: true,
+          },
+          marks: [
+            Plot.barY(metricData, {
+              x: "ms_bucket",
+              y: "value",
+              fill: metric.color,
+              opacity: (d) => 0.5 + 0.5 * (d.num_blocks / maxBlocks),
+              title: (d) =>
+                `Bucket: ${d.ms_bucket}ms - ${d.ms_bucket + bucketSize}ms\n${metric.name}: ${d.value.toFixed(9)} ETH\nBlocks: ${d.num_blocks}`,
+            }),
+            Plot.ruleY([0]),
+            Plot.text(metricData, {
+              x: "ms_bucket",
+              y: "value",
+              text: (d) => d.value.toFixed(6),
+              dy: -5,
+              fontSize: 9,
+              fill: "#333",
+              fontWeight: "bold",
+            }),
+            Plot.text(metricData, {
+              x: "ms_bucket",
+              y: 0,
+              text: (d) => d.num_blocks,
+              dy: 25,
+              fontSize: 9,
+              fill: "#999",
+            }),
+          ],
+        });
+      });
+
+      // Add last plot with x-axis label
+      const maxMetric = metrics[metrics.length - 1];
+      const maxData = filteredData.map((d) => ({
+        ms_bucket: d.ms_bucket,
+        value: d[maxMetric.field],
+        num_blocks: d.num_blocks,
+      }));
+
+      const lastPlot = Plot.plot({
+        title: "MAX",
+        width: plotWidth,
+        height: 180,
+        marginLeft: 80,
+        marginBottom: 60,
+        marginTop: 30,
+        x: {
+          label: "Time bucket (ms from slot start)",
+          tickFormat: (d) => `${d}ms`,
+        },
+        y: {
+          label: "ETH",
+          grid: true,
+        },
+        marks: [
+          Plot.barY(maxData, {
+            x: "ms_bucket",
+            y: "value",
+            fill: maxMetric.color,
+            opacity: (d) => 0.5 + 0.5 * (d.num_blocks / maxBlocks),
+            title: (d) =>
+              `Bucket: ${d.ms_bucket}ms - ${d.ms_bucket + bucketSize}ms\nmax: ${d.value.toFixed(9)} ETH\nBlocks: ${d.num_blocks}`,
+          }),
+          Plot.ruleY([0]),
+          Plot.text(maxData, {
+            x: "ms_bucket",
+            y: "value",
+            text: (d) => d.value.toFixed(6),
+            dy: -5,
+            fontSize: 9,
+            fill: "#333",
+            fontWeight: "bold",
+          }),
+          Plot.text(maxData, {
+            x: "ms_bucket",
+            y: 0,
+            text: (d) => d.num_blocks,
+            dy: 35,
+            fontSize: 9,
+            fill: "#999",
+          }),
+        ],
+      });
+
+      plots.push(lastPlot);
+
+      // Update plots container
+      plotsContainer.innerHTML = plots.map(plot => `<div class="plot-container">${plot.outerHTML}</div>`).join('\n');
+
+      // Update wrapper width
+      document.querySelector('.plots-wrapper').style.minWidth = plotWidth + 'px';
+    }
+
+    // Add event listeners
+    minRange.addEventListener('input', updatePlots);
+    maxRange.addEventListener('input', updatePlots);
+  </script>
 </body>
 </html>
