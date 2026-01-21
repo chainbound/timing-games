@@ -27,8 +27,8 @@ const maxBlocks = d3.max(data, (d) => d.num_blocks);
 const bucketSize = data.length > 1 ? data[1].ms_bucket - data[0].ms_bucket : 200;
 
 // Calculate dynamic width based on number of data points
-// Give each bar ~80px width for proper label spacing
-const plotWidth = Math.max(1400, data.length * 60);
+// Give each bar ~40px width for proper label spacing
+const plotWidth = Math.max(1400, data.length * 40);
 
 // Define metrics with their colors
 const metrics = [
@@ -50,7 +50,7 @@ const plots = metrics.map((metric) => {
   return Plot.plot({
     title: metric.name.toUpperCase(),
     width: plotWidth,
-    height: 180,
+    height: 150,
     marginLeft: 80,
     marginBottom: 50,
     marginTop: 30,
@@ -78,7 +78,7 @@ const plots = metrics.map((metric) => {
         y: "value",
         text: (d) => d.value.toFixed(6),
         dy: -5,
-        fontSize: 9,
+        fontSize: 7,
         fill: "#333",
         fontWeight: "bold",
       }),
@@ -88,7 +88,7 @@ const plots = metrics.map((metric) => {
         y: 0,
         text: (d) => d.num_blocks,
         dy: 25,
-        fontSize: 9,
+        fontSize: 7,
         fill: "#999",
       }),
     ],
@@ -105,7 +105,7 @@ const maxData = data.map((d) => ({
 const lastPlot = Plot.plot({
   title: "MAX",
   width: plotWidth,
-  height: 180,
+  height: 150,
   marginLeft: 80,
   marginBottom: 60,
   marginTop: 30,
@@ -133,7 +133,7 @@ const lastPlot = Plot.plot({
       y: "value",
       text: (d) => d.value.toFixed(6),
       dy: -5,
-      fontSize: 9,
+      fontSize: 7,
       fill: "#333",
       fontWeight: "bold",
     }),
@@ -143,7 +143,7 @@ const lastPlot = Plot.plot({
       y: 0,
       text: (d) => d.num_blocks,
       dy: 35,
-      fontSize: 9,
+      fontSize: 7,
       fill: "#999",
     }),
   ],
@@ -177,14 +177,17 @@ const htmlContent = `
       font-family: system-ui, sans-serif;
       padding: 20px;
       margin: 0 auto;
+      font-size: 12px;
     }
     h1 {
       margin-bottom: 5px;
+      font-size: 18px;
     }
     h2 {
       margin-top: 0;
       color: #666;
       font-weight: normal;
+      font-size: 14px;
     }
     .range-controls {
       background: #f5f5f5;
@@ -200,24 +203,25 @@ const htmlContent = `
       margin-bottom: 10px;
     }
     .range-row label {
-      min-width: 80px;
+      min-width: 70px;
       font-weight: 500;
+      font-size: 11px;
     }
     .range-row input[type="range"] {
       flex: 1;
       min-width: 200px;
     }
     .range-row .value {
-      min-width: 80px;
+      min-width: 60px;
       font-family: monospace;
-      font-size: 14px;
+      font-size: 11px;
     }
     .range-info {
       margin-top: 10px;
-      padding: 8px;
+      padding: 6px;
       background: white;
       border-radius: 4px;
-      font-size: 14px;
+      font-size: 11px;
     }
     .scroll-container {
       overflow-x: auto;
@@ -328,7 +332,7 @@ const htmlContent = `
       pointCount.textContent = filteredData.length;
 
       // Calculate dynamic width
-      const plotWidth = Math.max(1400, filteredData.length * 60);
+      const plotWidth = Math.max(1400, filteredData.length * 40);
 
       // Generate new plots
       const plots = metrics.slice(0, -1).map((metric) => {
@@ -341,7 +345,7 @@ const htmlContent = `
         return Plot.plot({
           title: metric.name.toUpperCase(),
           width: plotWidth,
-          height: 180,
+          height: 150,
           marginLeft: 80,
           marginBottom: 50,
           marginTop: 30,
@@ -368,7 +372,7 @@ const htmlContent = `
               y: "value",
               text: (d) => d.value.toFixed(6),
               dy: -5,
-              fontSize: 9,
+              fontSize: 7,
               fill: "#333",
               fontWeight: "bold",
             }),
@@ -377,7 +381,7 @@ const htmlContent = `
               y: 0,
               text: (d) => d.num_blocks,
               dy: 25,
-              fontSize: 9,
+              fontSize: 7,
               fill: "#999",
             }),
           ],
@@ -395,7 +399,7 @@ const htmlContent = `
       const lastPlot = Plot.plot({
         title: "MAX",
         width: plotWidth,
-        height: 180,
+        height: 150,
         marginLeft: 80,
         marginBottom: 60,
         marginTop: 30,
@@ -422,7 +426,7 @@ const htmlContent = `
             y: "value",
             text: (d) => d.value.toFixed(6),
             dy: -5,
-            fontSize: 9,
+            fontSize: 7,
             fill: "#333",
             fontWeight: "bold",
           }),
@@ -431,7 +435,7 @@ const htmlContent = `
             y: 0,
             text: (d) => d.num_blocks,
             dy: 35,
-            fontSize: 9,
+            fontSize: 7,
             fill: "#999",
           }),
         ],
