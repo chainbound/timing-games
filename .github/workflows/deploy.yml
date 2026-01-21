@@ -1,0 +1,73 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      start_block:
+        description: 'Start block number'
+        required: true
+        default: '24250508'
+      amount:
+        description: 'Number of blocks to analyze'
+        required: true
+        default: '100'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Generate plot
+        env:
+          XATU_USERNAME: ${{ secrets.XATU_USERNAME }}
+          XATU_PASSWORD: ${{ secrets.XATU_PASSWORD }}
+        run: |
+          START_BLOCK=${{ github.event.inputs.start_block || '24250508' }}
+          AMOUNT=${{ github.event.inputs.amount || '100' }}
+          echo "Generating plot for blocks $START_BLOCK to $(($START_BLOCK + $AMOUNT))"
+
+          # Generate CSV data
+          ./trace-aggregate-csv.sh $START_BLOCK $AMOUNT | curl https://clickhouse.xatu.ethpandaops.io \
+            -u "$XATU_USERNAME:$XATU_PASSWORD" \
+            --data-binary @- > data.csv
+
+          # Generate plot
+          bun run plot-trace.js data.csv index.html
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
