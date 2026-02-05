@@ -164,6 +164,11 @@ const blockRangeText = startBlock !== "unknown" && endBlock !== "unknown"
 const minTime = d3.min(data, (d) => d.ms_bucket);
 const maxTime = d3.max(data, (d) => d.ms_bucket);
 
+// Calculate initial weighted mean
+const totalBlocks = d3.sum(data, (d) => d.num_blocks);
+const weightedSum = d3.sum(data, (d) => d.mean_increase_eth * d.num_blocks);
+const initialWeightedMean = totalBlocks > 0 ? (weightedSum / totalBlocks).toFixed(9) : "0.000000000";
+
 const htmlContent = `
 <!DOCTYPE html>
 <html>
@@ -277,6 +282,8 @@ const htmlContent = `
     <div class="range-info">
       Showing <strong><span id="range-display">${minTime}ms - ${maxTime}ms</span></strong>
       (<span id="point-count">${data.length}</span> data points)
+      &nbsp;|&nbsp;
+      <strong>Weighted mean increase:</strong> <span id="weighted-mean">${initialWeightedMean}</span> ETH
     </div>
   </div>
 
@@ -307,6 +314,7 @@ const htmlContent = `
     const rangeDisplay = document.getElementById('range-display');
     const pointCount = document.getElementById('point-count');
     const plotsContainer = document.getElementById('plots-container');
+    const weightedMeanEl = document.getElementById('weighted-mean');
 
     function updatePlots() {
       const min = parseInt(minRange.value);
@@ -330,6 +338,12 @@ const htmlContent = `
       // Filter data
       const filteredData = fullData.filter(d => d.ms_bucket >= min && d.ms_bucket <= max);
       pointCount.textContent = filteredData.length;
+
+      // Calculate weighted mean increase across selected range
+      const totalBlocks = filteredData.reduce((sum, d) => sum + d.num_blocks, 0);
+      const weightedSum = filteredData.reduce((sum, d) => sum + d.mean_increase_eth * d.num_blocks, 0);
+      const weightedMean = totalBlocks > 0 ? weightedSum / totalBlocks : 0;
+      weightedMeanEl.textContent = weightedMean.toFixed(9);
 
       // Calculate dynamic width
       const plotWidth = Math.max(1400, filteredData.length * 40);
