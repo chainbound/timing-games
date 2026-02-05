@@ -48,4 +48,5 @@ echo "WITH unique_bids AS (
   WHERE increase_from_prev_eth > 0
   GROUP BY ms_bucket
   ORDER BY ms_bucket
-  FORMAT CSVWithNames"
+  FORMAT CSVWithNames
+  SETTINGS max_execution_time = 600"
